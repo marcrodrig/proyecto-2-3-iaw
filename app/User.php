@@ -36,4 +36,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getRouteKeyName() {
+        return 'username';
+    }
+
+  /*  public function path($append='') {
+        $path = route('profile', $this->username);
+        return $append ? "{$path}/{$append}" : $path;
+    }*/
 }

@@ -17,8 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/logout', 'Auth\LoginController@logout');
+
+Route::get('profiles/{user}', 'ProfilesController@edit')->name('profile');
+
+Route::patch('profiles/{user}', 'ProfilesController@update');
+
+Auth::routes();

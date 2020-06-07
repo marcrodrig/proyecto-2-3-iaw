@@ -3,9 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Faker\Provider\Image as Faker;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 use App\User;
 
 class UserSeeder extends Seeder
@@ -25,12 +23,15 @@ class UserSeeder extends Seeder
             File::makeDirectory($filepath);
         }
 
+        $img = Image::make('public/images/foto1.png');
+        $img->save($filepath . '/foto1.png');
+
         DB::table('users')->insert([
             'name' => 'Marcelo Rodríguez',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('adminiaw'),
             'username' => 'mrod',
-           'avatar' => Faker::image('public/storage',400,300, null, false) 
+            'avatar' => 'foto1.png'
         ]);
     }
 }
