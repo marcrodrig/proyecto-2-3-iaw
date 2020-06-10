@@ -7,6 +7,7 @@
     <link href='https://unpkg.com/@fullcalendar/core@4.4.2/main.min.css' rel='stylesheet' />
     <link href='https://unpkg.com/@fullcalendar/daygrid@4.4.2/main.min.css' rel='stylesheet' />
     <link href='https://unpkg.com/@fullcalendar/timegrid@4.4.2/main.min.css' rel='stylesheet' />
+    <link href='https://unpkg.com/@fullcalendar/list@4.4.2/main.min.css' rel='stylesheet' />
     <link href="https://unpkg.com/@fullcalendar/bootstrap@4.4.2/main.min.css" rel="stylesheet">
 
     <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
@@ -38,7 +39,7 @@
 
             <div>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-event">
-                    <i class="mdi mdi-plus mr-1"></i> Add New Event
+                    <i class="mdi mdi-plus mr-1"></i> Agregar Reserva
                 </button>
             </div>
         </div>
@@ -51,14 +52,34 @@
             </div>
         </div>
 
+        <!-- boton prueba roles  -->
+        @can('edit_turno')
+            <li><a href="#">Editar Turno</a></li>
+        @endcan
+
+        @forelse ($turnos as $turno)  
+                <li>
+                    {{ $turno->descripcion }}
+                    {{ $turno->dia }}
+                    {{ $turno->horario }}
+                </li>
+            @empty
+                <p>No hay turnos</p>
+            @endforelse
+
+
         <!-- Add Event Button  -->
         <div class="modal fade" id="modal-add-event" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <form>
+                    <!--
+
+                        VER ACA reserva
+                        -->
                         <div class="modal-header px-4">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Add New Event</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Agregar Reserva</h5>
 
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -109,7 +130,7 @@
                         </div>
 
                         <div class="modal-footer border-top-0 px-4 pt-0">
-                            <button type="button" class="btn btn-primary btn-pill m-0">Creat Event</button>
+                            <button type="button" class="btn btn-primary btn-pill m-0">Crear Reserva</button>
                         </div>
                     </form>
                 </div>
@@ -121,6 +142,7 @@
     <script src='https://unpkg.com/@fullcalendar/core@4.4.2/main.min.js'></script>
     <script src='https://unpkg.com/@fullcalendar/daygrid@4.4.2/main.min.js'></script>
     <script src='https://unpkg.com/@fullcalendar/timegrid@4.4.2/main.min.js'></script>
+    <script src='https://unpkg.com/@fullcalendar/list@4.4.2/main.min.js'></script>
     <script src="https://unpkg.com/@fullcalendar/bootstrap@4.4.2/main.min.js"></script>
     <script src='js/app.calendar.js'></script>
 

@@ -5,8 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description"
-        content="Sleek Dashboard - Free Bootstrap 4 Admin Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, which allows you to build products like admin panels, content management systems and CRMs etc.">
+    <meta name="description" content="Sleek Dashboard - Free Bootstrap 4 Admin Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, which allows you to build products like admin panels, content management systems and CRMs etc.">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -21,6 +20,8 @@
     <link href="https://unpkg.com/sleek-dashboard/dist/assets/css/sleek.min.css" rel="stylesheet" />
     <!-- FAVICON -->
     <link href="images/favicon.png" rel="shortcut icon" />
+
+    <link href="css/fullcalendar-personalizado.css" rel="stylesheet" />
 </head>
 
 <body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
@@ -58,7 +59,7 @@
                             <ul class="collapse show" id="app" data-parent="#sidebar-menu">
                                 <div class="sub-menu">
                                     <li class="active">
-                                        <a class="sidenav-item-link" href="#">
+                                        <a class="sidenav-item-link" href="{{ route('home') }}">
                                             <span class="nav-text">Calendar</span>
                                         </a>
                                     </li>
@@ -98,7 +99,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('profile', Auth::user())}}">
+                                        <a href="{{ Auth::user()->path() }}">
                                             <i class="mdi mdi-account"></i> My Profile
                                         </a>
                                     </li>

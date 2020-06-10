@@ -41,8 +41,23 @@ class User extends Authenticatable
         return 'username';
     }
 
-  /*  public function path($append='') {
-        $path = route('profile', $this->username);
-        return $append ? "{$path}/{$append}" : $path;
-    }*/
+    public function path() {
+        return route('users.edit', $this);
+    }
+
+    public function roles() {
+        return $this->belongsToMany(Role::class)->withTimestamps();
+    }
+
+    public function assignRole($role) {
+        /*if(is_string($role)) {
+            $role = Role::where('nombre',$role)->firstOrFail();
+        }*/
+        $this->roles()->syncWithoutDetaching($role);
+    }
+
+    public function abilities() {
+        return $this->roles->map->abilities->flatten()->pluck('nombre')->unique();
+    }
+
 }

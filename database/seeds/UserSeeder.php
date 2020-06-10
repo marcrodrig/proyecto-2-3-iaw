@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 use App\User;
+use App\Role;
+use App\Ability;
 
 class UserSeeder extends Seeder
 {
@@ -31,6 +33,20 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('adminiaw'),
             'username' => 'mrod',
+            'avatar' => 'foto1.png'
+        ]);
+
+        $user = User::find(1);
+        $administrador = Role::firstOrCreate(['nombre'=>'admin']);
+        $editarTurno = Ability::firstOrCreate(['nombre'=>'edit_turno']);
+        $administrador->allowTo($editarTurno);
+        $user->assignRole($administrador);
+
+        DB::table('users')->insert([
+            'name' => 'Patricio Rodríguez',
+            'email' => 'editor@gmail.com',
+            'password' => Hash::make('editoriaw'),
+            'username' => 'prod',
             'avatar' => 'foto1.png'
         ]);
     }

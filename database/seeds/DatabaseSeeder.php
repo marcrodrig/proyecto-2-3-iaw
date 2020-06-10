@@ -12,5 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UserSeeder::class);
+        factory(App\Cliente::class, 3)->create();
+        factory(App\Turno::class, 5)->create(['cliente_id'=>2]);
     }
 }

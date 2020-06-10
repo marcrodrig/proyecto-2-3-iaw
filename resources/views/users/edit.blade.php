@@ -33,12 +33,12 @@
                 <div class="tab-content px-3 px-xl-5">
                     <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                         <div class="tab-pane-content mt-5">
-                            <form method="POST" action="{{ $user->path }}">
+                            <form method="POST" action="{{ $user->path() }}">
                                     @csrf
                                     @method('PATCH')
                                     <div class="form-group">
                                             <label for="name">{{ __('Name') }}</label>
-                                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ $user-> name }}" autocomplete="name">
+                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
                                             @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
 
                                 <div class="form-group mb-4">
                                     <label for="username" style="text-transform: none;">Nombre de usuario</label>
-                                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ $user-> username }}">
+                                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{ old('username', $user->username) }}" required>
                                     @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>El campo nombre de usuario es inválido</strong>
@@ -57,8 +57,8 @@
                                 </div>
 
                                 <div class="form-group mb-4">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="{{ $user-> email }}">
+                                    <label for="email" style="text-transform: none;">{{ __('E-Mail Address') }}</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}">
                                 </div>
 
                                 <div class="form-group mb-4">
@@ -84,7 +84,7 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end mt-5">
-                                    <button type="submit" class="btn btn-primary mb-2 btn-pill">Update Profile</button>
+                                    <button type="submit" class="btn btn-primary mb-2 btn-pill">Editar Perfil</button>
                                 </div>
 
                             </form>
