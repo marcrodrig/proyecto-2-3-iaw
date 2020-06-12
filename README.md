@@ -77,3 +77,24 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Idea
+
+Implementar una aplicación web que permita administrar los turnos de una cancha de fútbol 5, ingresando los turnos, incluyendo un responsable de turno (nombre, apellido, foto y teléfono), tipo de turno (femenino, masculino, mixto), día y horario (cada turno dura 1 hora).
+
+Un usuario (rol administrador) puede: 
+- Visualizar, agregar, agregar, modificar y eliminar turnos.
+- Visualizar, agregar, agregar, modificar y eliminar clientes.
+- Editar la información de su perfil
+
+Un usuario (rol editor) sólo podría modificar el horario del turno.
+
+Se destacan entonces tres entidades: usuarios, clientes y turnos.
+
+El usuario (rol administrador) registra turnos que pertenecen a un cliente.
+
+Usuario: id, nombre, nombre de usuario, avatar, mail, password. 
+
+Cliente: id, nombre, apellido, DNI, teléfono, foto.
+
+Turno: id, título, día, horario, tipo de turno.
