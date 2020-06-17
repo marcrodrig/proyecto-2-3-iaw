@@ -25,7 +25,10 @@ Route::get('/home', 'TurnosController@index')->name('home');;
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
+//cambiar edit turno por edit perfal
 Route::get('/users/{user}', 'UsersController@edit')->name('users.edit')->middleware('can:edit_turno');
 
 Route::patch('/users/{user}', 'UsersController@update');
 Route::get('/getEvents', 'TurnosController@getEvents');
+
+Route::post('/turnos', 'TurnosController@store');

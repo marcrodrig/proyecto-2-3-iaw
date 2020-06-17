@@ -38,7 +38,9 @@ class UserSeeder extends Seeder
 
         $user = User::find(1);
         $administrador = Role::firstOrCreate(['nombre'=>'admin']);
+        $agregarTurno = Ability::firstOrCreate(['nombre'=>'add_turno']);
         $editarTurno = Ability::firstOrCreate(['nombre'=>'edit_turno']);
+        $administrador->allowTo($agregarTurno);
         $administrador->allowTo($editarTurno);
         $user->assignRole($administrador);
 

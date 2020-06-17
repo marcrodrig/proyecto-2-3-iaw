@@ -135,6 +135,26 @@ return [
         'rut' => [
             'unique' => 'El rut ya ha sido registrado.',
         ],
+        'nombre' => [
+            'min' => 'El :attribute debe contener al menos :min caracteres.',
+            'max' => 'El :attribute no debe tener más que 20 caracteres.',
+        ],
+        'apellido' => [
+            'min' => 'El :attribute debe contener al menos :min caracteres.',
+            'max' => 'El :attribute no debe tener más que 20 caracteres.',
+        ],
+        'DNI' => [
+            'numeric' =>'El DNI debe ser un número.'],
+        'foto' => [
+            'mimes' => 'La foto debe ser un archivo con formato: jpeg, bmp, png.'
+        ],
+        'dateRange' => [
+            'required' => 'El campo día es obligatorio.',
+            'date' => 'Formato de fecha válida: AAAA-MM-DD.'
+        ],
+        'avatar' => [
+            'mimes' => 'La foto debe ser un archivo con formato: jpeg, bmp, png.'
+        ],
     ],
     /*
     |--------------------------------------------------------------------------

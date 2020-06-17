@@ -16,9 +16,9 @@ class CreateTurnosTable extends Migration
         Schema::create('turnos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cliente_id');
-            $table->string('descripcion');
             $table->date('dia');
-            $table->time('horario');
+            $table->time('hora');
+            $table->string('tipoTurno',20);
             $table->timestamps();
 
             $table->foreign('cliente_id')

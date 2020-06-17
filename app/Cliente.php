@@ -8,7 +8,7 @@ class Cliente extends Model
 {
 
     protected $fillable = [
-        'nombre'
+        'nombre', 'apellido', 'DNI', 'telefono', 'foto'
     ];
 
     public function turnos() {

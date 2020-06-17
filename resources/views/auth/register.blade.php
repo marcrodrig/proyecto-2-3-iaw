@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -54,6 +54,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="avatar" class="col-md-4 col-form-label text-md-right">Avatar</label>
+
+                            <div class="col-md-6">
+                                    <input type="file" class="custom-file-input" id="avatar" name="avatar"  required lang="es" autocomplete="avatar">
+                                    <label class="custom-file-label @error('avatar') is-invalid @enderror ml-3 mr-3" for="avatar">Seleccionar archivo...</label>
+                                    @error('avatar')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
@@ -88,4 +102,15 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script>
+    $('#avatar').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        fileName = fileName.substring(fileName.lastIndexOf("\\") + 1, fileName.length);
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+	});
+</script>
 @endsection

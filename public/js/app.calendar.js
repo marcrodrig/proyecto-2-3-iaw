@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		weekends: true,
 		eventLimit: true,
 
-		events: '/getEvents',
+		events: '/getEvents', // ver si url
+		// SEGUIR CON UN EVENTCLICK PARA MOSTRAR UN MODAL PARA ELIMINAR Y BORRAR
 
 		eventRender: function (info) {
 			var ntoday = moment().format('YYYYMMDD');

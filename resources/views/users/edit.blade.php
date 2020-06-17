@@ -33,7 +33,7 @@
                 <div class="tab-content px-3 px-xl-5">
                     <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                         <div class="tab-pane-content mt-5">
-                            <form method="POST" action="{{ $user->path() }}">
+                            <form method="POST" action="{{ $user->path() }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PATCH')
                                     <div class="form-group">
@@ -78,7 +78,7 @@
 
                                 <div class="form-group mb-6">
                                     <label for="coverImage" class="col-form-label">Avatar</label>
-                                            <input type="file" class="form-control" id="avatar">
+                                            <input type="file" class="form-control" name="avatar" id="avatar">
                                             <label class="border" for="avatar"></label>
                                             <div class="invalid-feedback">Example invalid custom file feedback</div>
                                 </div>
