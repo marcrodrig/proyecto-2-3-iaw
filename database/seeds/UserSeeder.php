@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
     {
         User::truncate();
 
-        $filepath = public_path('storage');
+        $filepath = storage_path('/app/public');
 
         if(!File::exists($filepath)){
             File::makeDirectory($filepath);

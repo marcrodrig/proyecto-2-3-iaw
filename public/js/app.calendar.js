@@ -1,13 +1,9 @@
-/* ====== Index ======
-
-1. CALENDAR JS
-
-====== End ======*/
+var calendar;
 
 document.addEventListener('DOMContentLoaded', function () {
 	var calendarEl = document.getElementById('calendar');
 	var SITEURL = "{{url('/')}}";
-	var calendar = new FullCalendar.Calendar(calendarEl, {
+	calendar = new FullCalendar.Calendar(calendarEl, {
 		plugins: ['dayGrid', 'timeGrid', 'bootstrap', 'list'],
 		defaultView: 'dayGridMonth',
 		locale: "es",
@@ -52,13 +48,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		weekends: true,
 		eventLimit: true,
 
-		events: '/getEvents', // ver si url
-		// SEGUIR CON UN EVENTCLICK PARA MOSTRAR UN MODAL PARA ELIMINAR Y BORRAR
-
 		eventRender: function (info) {
 			var ntoday = moment().format('YYYYMMDD');
 			var eventStart = moment(info.event.start).format('YYYYMMDD');
-			info.el.setAttribute("title", info.event.extendedProps.description);
+			info.el.setAttribute("title", "Editar/Borrar turno");
 			info.el.setAttribute("data-toggle", "tooltip");
 			if (eventStart < ntoday) {
 				info.el.classList.add("fc-past-event");

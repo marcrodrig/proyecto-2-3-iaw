@@ -23,7 +23,6 @@
     <!-- FAVICON -->
     <link href="images/favicon.png" rel="shortcut icon" />
 
-    <link href="css/fullcalendar-personalizado.css" rel="stylesheet" />
 </head>
 
 <body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
@@ -101,8 +100,8 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{ Auth::user()->path() }}">
-                                            <i class="mdi mdi-account"></i> My Profile
+                                        <a href="{{ route('users.edit', Auth::user()) }}">
+                                            <i class="mdi mdi-account"></i> Perfil
                                         </a>
                                     </li>
                                     <li class="right-sidebar-in">

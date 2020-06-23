@@ -33,7 +33,7 @@
                 <div class="tab-content px-3 px-xl-5">
                     <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                         <div class="tab-pane-content mt-5">
-                            <form method="POST" action="{{ $user->path() }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('users.update', Auth::user()) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PATCH')
                                     <div class="form-group">

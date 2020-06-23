@@ -21,14 +21,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'TurnosController@index')->name('home');;
+Route::get('/home', 'TurnosController@index')->name('home');
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
-//cambiar edit turno por edit perfal
-Route::get('/users/{user}', 'UsersController@edit')->name('users.edit')->middleware('can:edit_turno');
+//cambiar edit turno por edit perfil
+Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit')->middleware('can:edit_turno');
 
-Route::patch('/users/{user}', 'UsersController@update');
+Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
 Route::get('/getEvents', 'TurnosController@getEvents');
 
 Route::post('/turnos', 'TurnosController@store');
+Route::get('/turnos/create', 'TurnosController@create')->name('turnos.create');
+Route::get('/turnos/{idTurno}/edit', 'TurnosController@edit')->name('turnos.edit');
+Route::patch('/turnos/{idTurno}', 'TurnosController@update')->name('turnos.update');
+Route::delete('/turnos/{turno}', 'TurnosController@destroy')->name('turnos.destroy');

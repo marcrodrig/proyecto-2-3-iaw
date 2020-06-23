@@ -26,9 +26,10 @@ class UsersController extends Controller
         ]);
         $actualizaAvatar = request()->has('avatar');
         if ($actualizaAvatar) {
-          $file = request('avatar');
-          $filename = $file->getClientOriginalName();
-          request('avatar')->storeAs('/',$filename);
+            // Store en storage/app/public, link con public/storage
+            $file = request()->file('avatar');
+            $filename = $file->getClientOriginalName();
+            $file->storeAs($filename,'');
             $validatedAttributes['avatar'] = $filename;
         }
         $validatedAttributes['password'] = Hash::make($validatedAttributes['password']);

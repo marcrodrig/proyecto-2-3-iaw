@@ -22,32 +22,22 @@ class TurnosController extends Controller
     }
 */
 
-    public function index()
-    {
+    public function index() {
         return view('turnos.index', [
             'turnos' => Turno::all()
         ]);
     }
 
-    public function getEvents()
-{
-    $getEvents = Turno::select('cliente_id', 'dia', 'hora', 'tipoTurno')->get();
-    $events = [];
-
-    foreach ($getEvents as $values) {
-        $cliente = Cliente::find($values->cliente_id);
-        $datetime = $values->dia . ' ' . $values->hora;
-        $event = [];
-        $event['title'] = $cliente->nombre . ' ' . $cliente->apellido;
-        $event['start'] = $datetime;
-        $event['tipoTurno'] = "Turno masculino";
-        $events[] = $event;
+    public function edit($id) {
+        $turno = Turno::find($id);
+        return view('turnos.edit', compact('turno'));
     }
 
-    return $events;
-}
-    public function store(Request $request)
-    {
+    public function create() {
+        return view('turnos.create');
+    }
+//seguir ver bien piola
+    public function store(Request $request) {
        // ver validar uniques
        // ver errores mantener datos válidos
         $validator = Validator::make($request->all(),[
@@ -55,14 +45,15 @@ class TurnosController extends Controller
             'apellido' => ['required', 'string', 'min:2', 'max:20', 'alpha'],
             'foto' => ['required', 'mimes:jpeg,bmp,png'],
             'DNI' => ['required', 'numeric'],
-            'dateRange'=> ['required', 'date'],
+            'telefono' => ['required', 'phone:AR'],
+            'dia'=> ['required', 'date'],
             'hora' => ['required', 'date_format:H:i:s'],
             'tipoTurno'=> ['required', Rule::in(['femenino', 'masculino', 'mixto']),]
         ]);
         //    dd($validator);
         if ($validator->fails()) {
            // dd($validator->messages());
-            return redirect('/home')
+            return redirect(route('turnos.create'))
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -88,7 +79,34 @@ class TurnosController extends Controller
 
         $cliente->turnos()->create($turno);
     //  dd($cliente);
+    //ver with
         return redirect('/home')->with('success', 'Contact saved!');
+    }
+
+    public function update($id) {
+        $dataTurno = request()->only(['dia', 'hora', 'tipoTurno']);
+        $validator = Validator::make($dataTurno,[
+            'dia'=> ['required', 'date'],
+            'hora' => ['required', 'date_format:H:i:s'],
+            'tipoTurno'=> ['required', Rule::in(['femenino', 'masculino', 'mixto']),]
+        ]);
+
+        if ($validator->fails()) {
+            return redirect(route('turnos.edit', $id))
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $turno = Turno::findOrFail($id);
+        $turno->update($dataTurno);
+
+        return redirect('/home')->with('success', 'Turno modificado.');
+    }
+
+    public function destroy($id) {
+		$turno = Turno::findOrFail($id);
+		$turno->delete();
+        return redirect('/home')->with('success', 'Turno eliminado.');
     }
 
 }
