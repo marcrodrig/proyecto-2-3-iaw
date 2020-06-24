@@ -36,7 +36,7 @@ class TurnosController extends Controller
     public function create() {
         return view('turnos.create');
     }
-//seguir ver bien piola
+
     public function store(Request $request) {
        // ver validar uniques
        // ver errores mantener datos válidos
@@ -63,24 +63,22 @@ class TurnosController extends Controller
         request('foto')->storeAs('/',$filename);
         //firstOrCreate?
         $cliente = Cliente::create([
-            //SEGUIR DE ACA
             'nombre' => $request->get('nombre'),
             'apellido' => $request->get('apellido'),
             'DNI' => $request->get('DNI'),
-            'telefono' => 435876,
+            'telefono' => $request->get('telefono'),
             'foto' => $filename
         ]);
 
         $turno = [
-            'dia' => $request->get('dateRange'),
+            'dia' => $request->get('dia'),
             'hora' => $request->get('hora'),
             'tipoTurno' => $request->get('tipoTurno')
         ];
 
         $cliente->turnos()->create($turno);
     //  dd($cliente);
-    //ver with
-        return redirect('/home')->with('success', 'Contact saved!');
+        return redirect('/home')->with('success', 'Turno agregado.');
     }
 
     public function update($id) {

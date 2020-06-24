@@ -14,9 +14,6 @@ class UsersController extends Controller
     }
 
     public function update(User $user) {
-      //  dd(request('avatar'));
-      
-       // dd($filename);
         $validatedAttributes = request()->validate([
             'username' => ['string', 'max:30', Rule::unique('users')->ignore($user), 'alpha_dash'],
             'name' => ['string', 'max:255'],

@@ -24,7 +24,7 @@
 						<div class="profile-content-left profile-left-spacing px-3">
 							<div class="card text-center widget-profile border-0">
 								<div class="card-img mx-auto rounded-circle">
-									<img src="{{ asset('storage/' . $turno->cliente->foto) }}" width="100" alt="user image">
+									<img src="{{ asset('storage/' . $turno->cliente->foto) }}" width="100" alt="Foto Cliente">
 								</div>
 								<div class="card-body">
 									<h4 class="text-dark">{{$turno->cliente->nombre}} {{$turno->cliente->apellido}}</h4>

@@ -21,7 +21,7 @@
     <!-- SLEEK CSS -->
     <link href="https://unpkg.com/sleek-dashboard/dist/assets/css/sleek.min.css" rel="stylesheet" />
     <!-- FAVICON -->
-    <link href="images/favicon.png" rel="shortcut icon" />
+    <link href="{{ asset('images/favicon.png') }}" rel="shortcut icon" />
 
 </head>
 
@@ -61,7 +61,12 @@
                                 <div class="sub-menu">
                                     <li class="active">
                                         <a class="sidenav-item-link" href="{{ route('home') }}">
-                                            <span class="nav-text">Calendar</span>
+                                            <span class="nav-text">Calendario</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="sidenav-item-link" href="{{ route('clientes') }}">
+                                            <span class="nav-text">Clientes</span>
                                         </a>
                                     </li>
                                 </div>
@@ -121,6 +126,11 @@
             </header>
             <div class="content-wrapper">
                 <div class="content">
+                    @if (session('success'))
+                        <div class="alert alert-success" id="success-alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     @yield('content')
                 </div>
             </div>
@@ -190,8 +200,16 @@
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/slimscrollbar/jquery.slimscroll.min.js') }}"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    @if (session('success'))
+        <script>
+            $(document).ready(function() {
+                $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+                    $("#success-alert").slideUp(500);
+                });
+            });
+        </script>
+    @endif
     @yield('scripts')
-
     <script src="{{ asset('js/sleek.bundle.js') }}"></script>
     <!-- <script src="https://unpkg.com/sleek-dashboard/dist/assets/js/sleek.bundle.js"></script> -->
 </body>

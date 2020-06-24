@@ -41,7 +41,7 @@
 											<div class="col">
 												<div class="md-form mt-1">
 													<i class="fas fa-user prefix grey-text"></i>
-													<input type="text" name="apellido" id="apellido" class="form-control @error('apellido') is-invalid @enderror" autocomplete="off">
+													<input type="text" name="apellido" id="apellido" class="form-control @error('apellido') is-invalid @enderror" value="{{ old('apellido') }}" autocomplete="off">
 													<label for="apellido">Apellido</label>
 													@error('apellido')
 														<span class="invalid-feedback" role="alert">
@@ -125,18 +125,18 @@
 													<div class="col">
 														<div class="form-group">
 															<select class="form-control" name="hora" id="hora">
-																<option value="12:00:00">12:00</option>
-																<option value="13:00:00">13:00</option>
-																<option value="14:00:00">14:00</option>
-																<option value="15:00:00">15:00</option>
-																<option value="16:00:00">16:00</option>
-																<option value="17:00:00">17:00</option>
-																<option value="18:00:00">18:00</option>
-																<option value="19:00:00">19:00</option>
-																<option value="20:00:00">20:00</option>
-																<option value="21:00:00">21:00</option>
-																<option value="22:00:00">22:00</option>
-																<option value="23:00:00">23:00</option>
+																<option value="12:00:00" {{ old('hora') == '12:00:00' ? 'selected' : '' }}>12:00</option>
+																<option value="13:00:00" {{ old('hora') == '13:00:00' ? 'selected' : '' }}>13:00</option>
+																<option value="14:00:00" {{ old('hora') == '14:00:00' ? 'selected' : '' }}>14:00</option>
+																<option value="15:00:00" {{ old('hora') == '15:00:00' ? 'selected' : '' }}>15:00</option>
+																<option value="16:00:00" {{ old('hora') == '16:00:00' ? 'selected' : '' }}>16:00</option>
+																<option value="17:00:00" {{ old('hora') == '17:00:00' ? 'selected' : '' }}>17:00</option>
+																<option value="18:00:00" {{ old('hora') == '18:00:00' ? 'selected' : '' }}>18:00</option>
+																<option value="19:00:00" {{ old('hora') == '19:00:00' ? 'selected' : '' }}>19:00</option>
+																<option value="20:00:00" {{ old('hora') == '20:00:00' ? 'selected' : '' }}>20:00</option>
+																<option value="21:00:00" {{ old('hora') == '21:00:00' ? 'selected' : '' }}>21:00</option>
+																<option value="22:00:00" {{ old('hora') == '22:00:00' ? 'selected' : '' }}>22:00</option>
+																<option value="23:00:00" {{ old('hora') == '23:00:00' ? 'selected' : '' }}>23:00</option>
 															</select>
 														</div>
 													</div>
@@ -154,9 +154,9 @@
 													<div class="col">
 														<div class="form-group">
 															<select class="form-control" name="tipoTurno" id="tipoTurno" required>
-																<option value="femenino">Femenino</option>
-																<option value="masculino">Masculino</option>
-																<option value="mixto">Mixto</option>
+																<option value="femenino" {{ old('tipoTurno') == 'femenino' ? 'selected' : '' }}>Femenino</option>
+																<option value="masculino" {{ old('tipoTurno') == 'masculino' ? 'selected' : '' }}>Masculino</option>
+																<option value="mixto" {{ old('tipoTurno') == 'mixto' ? 'selected' : '' }}>Mixto</option>
 															</select>
 														</div>
 													</div>
@@ -176,7 +176,7 @@
 		</div>
     @endsection
 
-	@section('scripts')
+@section('scripts')
 	<!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"></script>
     <script src={{ asset('js/moment.min.js') }}></script>
@@ -203,14 +203,6 @@
 		<script>
 			$(document).ready(function() {
 				var dia = moment(new Date()).format("YYYY-MM-DD");
-				$('#dia').data('daterangepicker').setStartDate(dia);
-				$('#dia').data('daterangepicker').setEndDate(dia);
-			});
-		</script>
-	@else
-		<script>       
-			$(document).ready(function() {
-				var dia = $('#dia').val();
 				$('#dia').data('daterangepicker').setStartDate(dia);
 				$('#dia').data('daterangepicker').setEndDate(dia);
 			});
