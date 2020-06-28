@@ -153,6 +153,9 @@ return [
             'required' => 'El campo día es obligatorio.',
             'date' => 'Formato de fecha válida: AAAA-MM-DD.'
         ],
+        'hora' => [
+            'unique' => 'Hay una reserva de turno ese día y horario.'
+        ],
         'avatar' => [
             'mimes' => 'La foto debe ser un archivo con formato: jpeg, bmp, png.'
         ],

@@ -102,7 +102,7 @@
                 </div>
 			</div>
             <div class="modal-footer d-flex justify-content-center mt-4">
-				<button type="submit" for class="btn btn-primary btn-pill m-0">Editar Turno</button>
+				<button type="submit" for class="btn btn-primary btn-pill m-0">Editar Cliente</button>
 				</form>
             </div>
                 

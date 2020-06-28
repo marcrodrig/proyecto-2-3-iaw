@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cliente;
 use App\Turno;
-use Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -33,72 +32,69 @@ class TurnosController extends Controller
         return view('turnos.edit', compact('turno'));
     }
 
-    public function create() {
-        return view('turnos.create');
+    public function createStep1(Request $request) {
+        $clientes = Cliente::all();
+        return view('turnos.create.step1')->with('clientes', $clientes);
+    }
+
+    public function postCreateStep1(Request $request) {
+        $idCliente = $request->validate(['id' => ['required']]);
+        return redirect()->route('turnos.create.step2', $idCliente['id']);
+    }
+
+   public function createStep2($idCliente) {
+        $cliente = Cliente::findOrFail($idCliente);
+        return view('turnos.create.step2', compact('cliente'));
+    }
+
+    public function postCreateStep2($idCliente) {
+        $cliente = Cliente::findOrFail($idCliente);
+        return redirect()->route('turnos.create.step3',$cliente);
+    }
+
+    public function createStep3($idCliente) {
+        $cliente = Cliente::findOrFail($idCliente);
+        return view('turnos.create.step3', compact('cliente'));
     }
 
     public function store(Request $request) {
-       // ver validar uniques
-       // ver errores mantener datos válidos
-        $validator = Validator::make($request->all(),[
-            'nombre' => ['required', 'string', 'min:2', 'max:20', 'alpha'],
-            'apellido' => ['required', 'string', 'min:2', 'max:20', 'alpha'],
-            'foto' => ['required', 'mimes:jpeg,bmp,png'],
-            'DNI' => ['required', 'numeric'],
-            'telefono' => ['required', 'phone:AR'],
+        $datosValidadosTurno = $request->validate([
             'dia'=> ['required', 'date'],
-            'hora' => ['required', 'date_format:H:i:s'],
+            'hora' => ['required', 'date_format:H:i:s',
+                    Rule::unique('turnos')->where(function ($query) use ($request) {
+                        return $query->where('dia', $request->dia);})
+                    ],
             'tipoTurno'=> ['required', Rule::in(['femenino', 'masculino', 'mixto']),]
         ]);
-        //    dd($validator);
-        if ($validator->fails()) {
-           // dd($validator->messages());
-            return redirect(route('turnos.create'))
-                        ->withErrors($validator)
-                        ->withInput();
-        }
         
-        $file = $request['foto'];
-        $filename = $file->getClientOriginalName();
-        request('foto')->storeAs('/',$filename);
-        //firstOrCreate?
-        $cliente = Cliente::create([
-            'nombre' => $request->get('nombre'),
-            'apellido' => $request->get('apellido'),
-            'DNI' => $request->get('DNI'),
-            'telefono' => $request->get('telefono'),
-            'foto' => $filename
-        ]);
+        $cliente = Cliente::findOrFail($request->get('idCliente'));
+        $cliente->turnos()->create($datosValidadosTurno);
 
-        $turno = [
-            'dia' => $request->get('dia'),
-            'hora' => $request->get('hora'),
-            'tipoTurno' => $request->get('tipoTurno')
-        ];
-
-        $cliente->turnos()->create($turno);
-    //  dd($cliente);
         return redirect('/home')->with('success', 'Turno agregado.');
     }
 
-    public function update($id) {
-        $dataTurno = request()->only(['dia', 'hora', 'tipoTurno']);
-        $validator = Validator::make($dataTurno,[
+    public function update(Request $request, $id) {
+        $datosTurno = $request->only(['dia', 'hora', 'tipoTurno']);
+        $validadorCreate = Validator::make($datosTurno, [
             'dia'=> ['required', 'date'],
-            'hora' => ['required', 'date_format:H:i:s'],
+            'hora' => ['required', 'date_format:H:i:s',
+                    Rule::unique('turnos')->where(function ($query) use ($request) {
+                        return $query->where('dia', $request->dia);})
+                    ],
             'tipoTurno'=> ['required', Rule::in(['femenino', 'masculino', 'mixto']),]
         ]);
 
-        if ($validator->fails()) {
-            return redirect(route('turnos.edit', $id))
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
         $turno = Turno::findOrFail($id);
-        $turno->update($dataTurno);
-
-        return redirect('/home')->with('success', 'Turno modificado.');
+        if ($validadorCreate->fails() &&
+            $validadorCreate->getData()['dia'] == $turno->dia &&
+            $validadorCreate->getData()['hora'] == $turno->hora) {
+                $turno->update($datosTurno);        
+                return redirect('/home')->with('success', 'Turno modificado.');
+            }
+        else
+            return redirect(route('turnos.edit', $id))
+                        ->withErrors($validadorCreate)
+                        ->withInput();
     }
 
     public function destroy($id) {

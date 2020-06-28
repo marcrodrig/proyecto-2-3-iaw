@@ -33,7 +33,7 @@
 		</div>
 		@can('add_turno')
 			<div>
-				<a href="/turnos/create" class="btn btn-primary">
+				<a href="{{route('turnos.create.step1')}}" class="btn btn-primary">
 					<i class="mdi mdi-plus mr-1"></i> Agregar Reserva
 				</a>
 			</div>

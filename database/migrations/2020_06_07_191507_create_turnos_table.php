@@ -20,6 +20,7 @@ class CreateTurnosTable extends Migration
             $table->time('hora');
             $table->string('tipoTurno',20);
             $table->timestamps();
+            $table->unique(['dia', 'hora']);
 
             $table->foreign('cliente_id')
                 ->references('id')

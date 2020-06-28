@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cliente;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class ClientesController extends Controller
 {
@@ -27,7 +28,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        //
+        return view('clientes.create');
     }
 
     /**
@@ -36,9 +37,24 @@ class ClientesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $datosValidadosCliente = $request->validate([
+             'nombre' => ['required', 'string', 'min:2', 'max:20', 'alpha'],
+             'apellido' => ['required', 'string', 'min:2', 'max:20', 'alpha'],
+             'DNI' => ['required', 'numeric'],
+             'telefono' => ['required', 'phone:AR'],
+             'foto' => ['required', 'mimes:jpeg,bmp,png']
+        ]);
+
+        $file = $request['foto'];
+        $filename = $file->getClientOriginalName();
+        $file->storeAs('/',$filename);
+
+        $datosValidadosCliente['foto'] = $filename;
+
+        Cliente::create($datosValidadosCliente);
+
+        return redirect(route('clientes'))->with('success', 'Cliente agregado.');
     }
 
     /**
@@ -88,6 +104,20 @@ class ClientesController extends Controller
         }
 
         $cliente = Cliente::findOrFail($id);
+
+        if($request->has('foto')) {
+            // Elimino foto antigua
+            Storage::delete([$cliente->foto]);
+            // Almaceno nueva foto
+            $file = $request['foto'];
+            $fullname = $file->getClientOriginalName();
+            $filename = pathinfo($fullname, PATHINFO_FILENAME) . '-cliente' . $cliente->id;
+            $extension = pathinfo($fullname, PATHINFO_EXTENSION);
+            $filename = $filename.'.'.$extension;
+            $file->storeAs('/',$filename);
+            $dataCliente['foto'] = $filename;
+        }
+
         $cliente->update($dataCliente);
 
         return redirect(route('clientes'))->with('success', 'Cliente modificado.');

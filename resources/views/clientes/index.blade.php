@@ -15,7 +15,14 @@
                     <li class="breadcrumb-item" aria-current="page">clientes</li>
                 </ol>
             </nav>
-		</div>
+        </div>
+        @can('add_turno') {{-- Cambiar por add_cliente --}}
+			<div>
+				<a href="{{route('turnos.create.step1')}}" class="btn btn-primary">
+					<i class="mdi mdi-account-plus mr-1"></i> Agregar cliente
+				</a>
+			</div>
+		@endcan
     </div>
     <div class="row">
         @foreach ($clientes as $cliente)
