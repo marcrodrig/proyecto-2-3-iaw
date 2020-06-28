@@ -85,9 +85,10 @@ class TurnosController extends Controller
         ]);
 
         $turno = Turno::findOrFail($id);
+    //    dd($validadorCreate);
         if ($validadorCreate->fails() &&
             $validadorCreate->getData()['dia'] == $turno->dia &&
-            $validadorCreate->getData()['hora'] == $turno->hora) {
+            $validadorCreate->getData()['hora'] == $turno->hora || $validadorCreate->passes()) {
                 $turno->update($datosTurno);        
                 return redirect('/home')->with('success', 'Turno modificado.');
             }
