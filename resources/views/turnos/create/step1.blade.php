@@ -1,7 +1,14 @@
-@extends('layouts.crearReserva')
+@extends('turnos/create/create-page')
 
 @section('modalBodyFooter')
-	<form id='formAdd' method="POST" action="{{ route('turnos.createStep1') }}">
+<div class="modal-body mx-3">
+	<!-- progressbar -->
+	<ul id="progressbar">
+		<li class="active">Seleccionar cliente</li>  
+		<li>Verificar cliente</li> 
+		<li>Detalles turno</li>
+	</ul>
+	<form method="POST" action="{{ route('turnos.createStep1') }}">
 		@csrf
 		@method('POST')
 		<div class="row">
@@ -25,7 +32,7 @@
 				<a href="{{route('clientes.create')}}" class="btn btn-primary">Agregar cliente</a>
 			</div>
 		</div>
-</div> {{-- Fin de modal-body --}}
+</div>
 <div class="modal-footer d-flex justify-content-center mt-4">
 	<button type="submit" class="btn btn-primary btn-pill m-0">Siguiente</button>
 	</form>

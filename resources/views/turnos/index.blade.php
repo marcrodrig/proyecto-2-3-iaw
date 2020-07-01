@@ -1,6 +1,6 @@
-@extends('layouts.sleek')
+@extends('adminlte::page')
 
-@section('head')
+@section('css')
      <!-- GOOGLE FONTS -->
      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
     
@@ -9,36 +9,31 @@
     <link href='https://unpkg.com/@fullcalendar/timegrid@4.4.2/main.min.css' rel='stylesheet' />
     <link href='https://unpkg.com/@fullcalendar/list@4.4.2/main.min.css' rel='stylesheet' />
     <link href="https://unpkg.com/@fullcalendar/bootstrap@4.4.2/main.min.css" rel="stylesheet">
-
-	<link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
-    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet' />
-    <link href="{{ asset('css/fullcalendar-personalizado.css') }}" rel="stylesheet" />
-@endsection
-
 @section('content')
-    <div class="breadcrumb-wrapper d-flex justify-content-between align-items-center">
-        <div>
-            <h1>Calendario</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb p-0">
-                    <li class="breadcrumb-item">
-                        <a href="/"><span class="mdi mdi-home"></span></a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        app
-                    </li>
-                    <li class="breadcrumb-item" aria-current="page">calendario</li>
-                </ol>
-            </nav>
-		</div>
-		@can('add_turno')
-			<div>
-				<a href="{{route('turnos.create.step1')}}" class="btn btn-primary">
-					<i class="mdi mdi-plus mr-1"></i> Agregar Reserva
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-3">
+        <div class="col-sm-6">
+          <h1>Calendario</h1>
+          <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item"><a href="/"><span><i class="fas fa-home mr-1"></i></span>Inicio</a></li>
+            <li class="breadcrumb-item">Administración</li>
+            <li class="breadcrumb-item active">Calendario</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+    @can('add_turno')
+    <div class="row">
+        <div class="col">
+				<a href="{{route('turnos.create.step1')}}" class="btn btn-primary float-right mb-2">
+					<i class="far fa-plus-square mr-1"></i> Agregar Reserva
 				</a>
-			</div>
+            </div>
+        </div>
 		@endcan
-    </div>
 
     <div class="card card-default">
         <div class="card-body p-0">
@@ -49,7 +44,7 @@
     </div>
 @endsection
 
-@section('scripts')
+@section('js')
     <script src='https://unpkg.com/@fullcalendar/core@4.4.2/main.min.js'></script>
     <script src='https://unpkg.com/@fullcalendar/daygrid@4.4.2/main.min.js'></script>
     <script src='https://unpkg.com/@fullcalendar/timegrid@4.4.2/main.min.js'></script>

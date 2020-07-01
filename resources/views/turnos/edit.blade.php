@@ -1,10 +1,10 @@
-@extends('layouts.sleek')
+@extends('adminlte::page')
 
-@section('head')
-<link href="{{ asset('css/daterangepicker.css') }}" rel="stylesheet" />
-<link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
-<!-- Material Design Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/css/mdb.min.css" rel="stylesheet">
+@section('css')
+    <link href="{{ asset('css/daterangepicker.css') }}" rel="stylesheet" />
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/cardCliente.css')}}"/>
 @endsection
 
 @section('content')
@@ -20,27 +20,12 @@
             </div>
             <div class="modal-body mx-3">
 				<div class="row no-gutters">
-					<div class="col-lg-4 ml-auto">
-						<div class="profile-content-left profile-left-spacing px-3">
-							<div class="card text-center widget-profile border-0">
-								<div class="card-img mx-auto rounded-circle">
-									<img src="{{ asset('storage/' . $turno->cliente->foto) }}" width="100" alt="Foto Cliente">
-								</div>
-								<div class="card-body">
-									<h4 class="text-dark">{{$turno->cliente->nombre}} {{$turno->cliente->apellido}}</h4>
-								</div>
-							</div>
-							<hr class="w-100 m-0">
-							<div class="contact-info mt-2">
-								<h5 class="text-dark mb-1">Información de contacto</h5>
-								<p class="text-dark font-weight-medium pt-2 mb-2">Teléfono</p>
-								<p>{{$turno->cliente->telefono}}</p>
-								<p class="text-dark font-weight-medium pt-2 mb-2">DNI</p>
-								<p>{{$turno->cliente->DNI}}</p>
-							</div>
+					<div class="col-lg-4 my-auto">
+						<div class="px-3">
+							<x-card-cliente :cliente="$turno->cliente"/>
 						</div>
 					</div>
-					<div class="col-lg-6 mr-auto my-auto">
+					<div class="col-lg-8 my-auto">
                         <form method="POST" action="{{ route('turnos.update', $turno->id) }}">
                             @csrf
                             @method('PATCH')
@@ -56,15 +41,14 @@
 					@method('DELETE')
 					<button type="submit" for class="btn btn-primary btn-pill m-0">Borrar Turno</button>
 				</form>
-            </div>
-                
+            </div>    
     	</div>
 	</div>
 </div>
 @endcan
 @endsection
 
-@section('scripts')
+@section('js')
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"></script>
     <script src={{ asset('js/moment.min.js') }}></script>

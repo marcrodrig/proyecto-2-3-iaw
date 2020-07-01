@@ -1,33 +1,19 @@
-@extends('layouts.sleek')
+@extends('adminlte::page')
 
 @section('content')
 <div class="bg-white border rounded">
     <div class="row no-gutters">
         <div class="col-lg-4 col-xl-3">
-            <div class="profile-content-left profile-left-spacing pt-5 pb-3 px-3 px-xl-5">
-                <div class="card text-center widget-profile px-0 border-0">
-                    <div class="card-img mx-auto rounded-circle">
-                        <img src="{{ asset('storage/' . Auth::user()->avatar) }}" width="100" alt="user image">
-                    </div>
-                    <div class="card-body">
-                        <h4 class="py-2 text-dark">{{$user->name}}</h4>
-                        <p>{{$user->username}}</p>
-                    </div>
-                </div>
-                <hr class="w-100">
-                <div class="contact-info pt-4">
-                    <h5 class="text-dark mb-1">Información de contacto</h5>
-                    <p class="text-dark font-weight-medium pt-4 mb-2">{{ __('E-Mail Address') }}</p>
-                    <p>{{$user -> email}}</p>
-                </div>
+            <div class="pt-5 pb-3 px-3 px-xl-5">
+                <x-card-user :user="$user"/>
             </div>
         </div>
         <div class="col-lg-8 col-xl-9">
-            <div class="profile-content-right profile-right-spacing py-5">
+            <div class="py-5">
                 <ul class="nav nav-tabs px-3 px-xl-5 nav-style-border" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="settings-tab" data-toggle="tab" href="#settings" role="tab"
-                            aria-controls="settings" aria-selected="false">Settings</a>
+                            aria-controls="settings" aria-selected="false">Ajustes</a>
                     </li>
                 </ul>
                 <div class="tab-content px-3 px-xl-5">

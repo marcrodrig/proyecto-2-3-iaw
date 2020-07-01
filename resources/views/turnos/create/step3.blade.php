@@ -1,10 +1,17 @@
-@extends('layouts.crearReserva')
+@extends('turnos/create/create-page')
 
-@section('headCreate')
-<link href="{{ asset('css/daterangepicker.css') }}" rel="stylesheet" />
+@section('css')
+	<link href="{{ asset('css/daterangepicker.css') }}" rel="stylesheet" />
 @endsection
 
 @section('modalBodyFooter')
+<div class="modal-body mx-3">
+	<!-- progressbar -->
+	<ul id="progressbar">
+		<li class="active">Seleccionar cliente</li>  
+		<li>Verificar cliente</li> 
+		<li>Detalles turno</li>
+	</ul>
     <form method="POST" action="{{ route('turnos.store') }}">
 		@csrf
 		@method('POST')
@@ -15,7 +22,7 @@
 			</div>
 			<div class="col-lg-2"></div>
 		</div>
-</div> {{-- Fin de modal-body --}}
+</div>
 <div class="modal-footer mt-1 d-flex justify-content-center">
 	<a href="{{ route('turnos.createStep2', $cliente->id) }}" class="btn btn-primary btn-pill mr-2">Atrás</a>
 	<input type="hidden" name="idCliente" value="{{$cliente->id}}"/>
@@ -24,7 +31,9 @@
 </div>
 @endsection
 
-@section('scriptsCreate')
+@section('js')
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"></script>
     <script src={{ asset('js/moment.min.js') }}></script>
     <script src={{ asset('js/daterangepicker.js') }}></script>
     <script>
