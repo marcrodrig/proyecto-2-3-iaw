@@ -3,7 +3,7 @@
 return [
 
     'full_name'                   => 'Nombre completo',
-    'email'                       => 'Correo electrónico',
+    'email'                       => 'Email',
     'password'                    => 'Contraseña',
     'retype_password'             => 'Confirmar la contraseña',
     'remember_me'                 => 'Recordarme',

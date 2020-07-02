@@ -2,12 +2,6 @@
 
 @inject('layoutHelper', \JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper)
 
-@if($layoutHelper->isLayoutTopnavEnabled())
-    @php( $def_container_class = 'container' )
-@else
-    @php( $def_container_class = 'container-fluid' )
-@endif
-
 @section('adminlte_css')
     @stack('css')
     @yield('css')
@@ -27,7 +21,7 @@
         @include('adminlte::partials/sidebar/left-sidebar')
 
         {{-- Content Wrapper --}}
-        <div class="content-wrapper {{ config('adminlte.classes_content_wrapper') ?? '' }}">
+        <div class="content-wrapper">
 
             {{-- Main Content --}}
             <div class="content">

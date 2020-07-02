@@ -1,9 +1,5 @@
 @extends('adminlte::auth/auth-page', ['auth_type' => 'login'])
 
-@section('adminlte_css_pre')
-    <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-@stop
-
 @php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
 @php( $register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register') )
 @php( $password_reset_url = View::getSection('password_reset_url') ?? config('adminlte.password_reset_url', 'password/reset') )
@@ -24,18 +20,18 @@
     <form action="{{ $login_url }}" method="post">
         {{ csrf_field() }}
 
-        {{-- Email field --}}
+        {{-- Email o Nombre de Usuario --}}
         <div class="input-group mb-3">
-            <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                   value="{{ old('email') }}" placeholder="{{ __('adminlte::adminlte.email') }}" autofocus>
+            <input type="text" id="login" name="login" class="form-control {{ $errors->has('username') || $errors->has('email') ? 'is-invalid' : '' }}"
+                   value="{{ old('username') ?: old('email') }}" placeholder="{{ __('adminlte::adminlte.email') . ' o nombre de usuario' }}" required autofocus>
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
                 </div>
             </div>
-            @if($errors->has('email'))
+            @if($errors->has('username') || $errors->has('email'))
                 <div class="invalid-feedback">
-                    <strong>{{ $errors->first('email') }}</strong>
+                    <strong>{{ $errors->first('username') ?: $errors->first('email')}}</strong>
                 </div>
             @endif
         </div>

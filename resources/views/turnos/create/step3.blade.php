@@ -2,6 +2,7 @@
 
 @section('css')
 	<link href="{{ asset('css/daterangepicker.css') }}" rel="stylesheet" />
+	<link rel="stylesheet" href="{{asset('css/navbarSidebar.css')}}"/>
 @endsection
 
 @section('modalBodyFooter')

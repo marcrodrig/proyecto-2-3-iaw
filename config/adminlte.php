@@ -14,24 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
-    'title_prefix' => '',
-    'title_postfix' => '',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Favicon
-    |--------------------------------------------------------------------------
-    |
-    | Here you can activate the favicon.
-    |
-    | For more detailed instructions you can look here:
-    | https://github.com/jeroennoten/Laravel-AdminLTE/#62-favicon
-    |
-    */
-
-    'use_ico_only' => false,
-    'use_full_favicon' => false,
+    'title' => 'MR Fútbol 5',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,12 +28,10 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'images/AdminLTELogo.png',
+    'logo' => '<b>MR</b> Fútbol 5',
+    'logo_img' => 'images/mr-icon.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
-    'logo_img_xl' => null,
-    'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_alt' => 'Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -66,28 +47,8 @@ return [
 
     'usermenu_enabled' => true,
     'usermenu_header' => true,
-    'usermenu_header_class' => 'bg-primary',
+    'usermenu_header_class' => 'bg-info',
     'usermenu_image' => true,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Layout
-    |--------------------------------------------------------------------------
-    |
-    | Here we change the layout of your admin panel.
-    |
-    | For more detailed instructions you can look here:
-    | https://github.com/jeroennoten/Laravel-AdminLTE/#65-layout
-    |
-    */
-
-    'layout_topnav' => null,
-    'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
-    'layout_fixed_footer' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -121,13 +82,8 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
-    'classes_brand_text' => '',
-    'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
-    'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
@@ -145,9 +101,8 @@ return [
     */
 
     'sidebar_mini' => true,
-    'sidebar_collapse' => false,
-    'sidebar_collapse_auto_size' => false,
-    'sidebar_collapse_remember' => false,
+    'sidebar_collapse' => true,
+    'sidebar_collapse_remember' => true,
     'sidebar_collapse_remember_no_transition' => false,
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
@@ -181,22 +136,6 @@ return [
     'password_email_url' => 'password/email',
 
     'profile_url' => false,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Laravel Mix
-    |--------------------------------------------------------------------------
-    |
-    | Here we can enable the Laravel Mix option for the admin panel.
-    |
-    | For more detailed instructions you can look here:
-    | https://github.com/jeroennoten/Laravel-AdminLTE/#610-laravel-mix
-    |
-    */
-
-    'enabled_laravel_mix' => false,
-    'laravel_mix_css_path' => 'css/app.css',
-    'laravel_mix_js_path' => 'js/app.js',
 
     /*
     |--------------------------------------------------------------------------

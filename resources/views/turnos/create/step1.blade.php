@@ -1,5 +1,9 @@
 @extends('turnos/create/create-page')
 
+@section('css')
+	<link rel="stylesheet" href="{{asset('css/navbarSidebar.css')}}"/>
+@endsection
+
 @section('modalBodyFooter')
 <div class="modal-body mx-3">
 	<!-- progressbar -->

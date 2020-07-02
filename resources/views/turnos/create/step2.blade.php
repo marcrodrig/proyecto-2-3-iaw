@@ -2,6 +2,7 @@
 
 @section('css')
 	<link rel="stylesheet" href="{{asset('css/cardCliente.css')}}"/>
+	<link rel="stylesheet" href="{{asset('css/navbarSidebar.css')}}"/>
 @endsection
 
 @section('modalBodyFooter')

@@ -1,14 +1,13 @@
 @extends('adminlte::page')
 
 @section('css')
-     <!-- GOOGLE FONTS -->
-     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
-    
     <link href='https://unpkg.com/@fullcalendar/core@4.4.2/main.min.css' rel='stylesheet' />
     <link href='https://unpkg.com/@fullcalendar/daygrid@4.4.2/main.min.css' rel='stylesheet' />
     <link href='https://unpkg.com/@fullcalendar/timegrid@4.4.2/main.min.css' rel='stylesheet' />
     <link href='https://unpkg.com/@fullcalendar/list@4.4.2/main.min.css' rel='stylesheet' />
-    <link href="https://unpkg.com/@fullcalendar/bootstrap@4.4.2/main.min.css" rel="stylesheet">
+	<link href="https://unpkg.com/@fullcalendar/bootstrap@4.4.2/main.min.css" rel="stylesheet">
+@endsection
+
 @section('content')
 <section class="content-header">
     <div class="container-fluid">
@@ -26,12 +25,10 @@
   </section>
 
     @can('add_turno')
-    <div class="row">
-        <div class="col">
-				<a href="{{route('turnos.create.step1')}}" class="btn btn-primary float-right mb-2">
-					<i class="far fa-plus-square mr-1"></i> Agregar Reserva
-				</a>
-            </div>
+        <div class="text-center">
+          <a href="{{route('turnos.create.step1')}}" class="btn btn-primary d-f float-center mb-2">
+            <i class="far fa-plus-square mr-1"></i> Agregar Reserva
+          </a>
         </div>
 		@endcan
 
@@ -73,5 +70,4 @@
 			calendar.addEventSource($events);
 		});
 	</script>
-	
 @endsection

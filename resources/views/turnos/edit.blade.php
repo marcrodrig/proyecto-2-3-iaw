@@ -5,6 +5,7 @@
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/css/mdb.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/cardCliente.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/navbarSidebar.css')}}"/>
 @endsection
 
 @section('content')

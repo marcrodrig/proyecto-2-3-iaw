@@ -1,22 +1,13 @@
-@php( $dashboard_url = View::getSection('dashboard_url') ?? config('adminlte.dashboard_url', 'home') )
-
-@if (config('adminlte.use_route_url', false))
-    @php( $dashboard_url = $dashboard_url ? route($dashboard_url) : '' )
-@else
-    @php( $dashboard_url = $dashboard_url ? url($dashboard_url) : '' )
-@endif
-
-<a href="{{ $dashboard_url }}"
-    class="brand-link {{ config('adminlte.classes_brand') }}">
+<a href="/" class="brand-link">
 
     {{-- Small brand logo --}}
-    <img src="{{ asset(config('adminlte.logo_img', 'images/AdminLTELogo.png')) }}"
+    <img src="{{ asset(config('adminlte.logo_img')) }}"
          alt="{{ config('adminlte.logo_img_alt', 'AdminLTE') }}"
          class="{{ config('adminlte.logo_img_class', 'brand-image img-circle elevation-3') }}"
          style="opacity:.8">
 
     {{-- Brand text --}}
-    <span class="brand-text font-weight-light {{ config('adminlte.classes_brand_text') }}">
+    <span class="brand-text font-weight-light">
         {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
     </span>
 

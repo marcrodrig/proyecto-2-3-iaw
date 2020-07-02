@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
 @section('css')
-    <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/navbarSidebar.css')}}"/>
 @endsection
 
 @section('content')

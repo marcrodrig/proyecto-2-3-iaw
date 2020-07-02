@@ -1,4 +1,4 @@
-<aside class="main-sidebar {{ config('adminlte.classes_sidebar', 'sidebar-dark-primary elevation-4') }}">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
 
     {{-- Sidebar brand logo --}}
     @include('adminlte::partials.common.brand-logo-xs')
@@ -6,7 +6,7 @@
     {{-- Sidebar menu --}}
     <div class="sidebar">
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column {{ config('adminlte.classes_sidebar_nav', '') }}"
+            <ul class="nav nav-pills nav-sidebar flex-column"
                 data-widget="treeview" role="menu"
                 @if(config('adminlte.sidebar_nav_animation_speed') != 300)
                     data-animation-speed="{{ config('adminlte.sidebar_nav_animation_speed') }}"
