@@ -18,7 +18,6 @@ class UsersController extends Controller
             'username' => ['string', 'max:30', Rule::unique('users')->ignore($user), 'alpha_dash'],
             'name' => ['string', 'max:255'],
             'email' => ['string', 'email', 'max:255', Rule::unique('users')->ignore($user)],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
             'avatar' => ['mimes:jpeg,bmp,png']
         ]);
         $actualizaAvatar = request()->has('avatar');
@@ -29,8 +28,6 @@ class UsersController extends Controller
             $file->storeAs($filename,'');
             $validatedAttributes['avatar'] = $filename;
         }
-        $validatedAttributes['password'] = Hash::make($validatedAttributes['password']);
-            
         $user->update($validatedAttributes);
         
         return redirect($user->path());

@@ -20,7 +20,7 @@
 		</div><!-- /.container-fluid -->
 	</section>
         
-	@can('add_turno') {{-- Cambiar por add_cliente --}}
+	@can('altaCliente')
 		<div class="text-center pb-5">
 			<a href="{{route('clientes.create')}}" class="btn btn-primary">
 				<i class="fas fa-user-plus mr-1"></i></i> Agregar Cliente
@@ -33,6 +33,7 @@
     	@foreach ($clientes as $cliente)
 			<div class="col-lg-4 d-flex justify-content-center">
 				<x-card-cliente :cliente="$cliente">
+					@can('bajaCliente', 'modificacionCliente')
 					<x-slot name="footer">
 						<div class="card-footer">
 							<div class="row">
@@ -51,6 +52,7 @@
 							</div>
 						</div>
 					</x-slot>
+					@endcan
 				</x-card-cliente>
 			</div>
         @endforeach

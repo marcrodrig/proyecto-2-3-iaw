@@ -50,9 +50,9 @@ class User extends Authenticatable
     }
 
     public function assignRole($role) {
-        /*if(is_string($role)) {
+        if(is_string($role)) {
             $role = Role::where('nombre',$role)->firstOrFail();
-        }*/
+        }
         $this->roles()->syncWithoutDetaching($role);
     }
 

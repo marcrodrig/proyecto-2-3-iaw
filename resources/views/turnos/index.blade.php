@@ -24,7 +24,7 @@
     </div><!-- /.container-fluid -->
   </section>
 
-    @can('add_turno')
+    @can('altaTurno')
         <div class="text-center">
           <a href="{{route('turnos.create.step1')}}" class="btn btn-primary d-f float-center mb-2">
             <i class="far fa-plus-square mr-1"></i> Agregar Reserva

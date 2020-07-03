@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-@can('edit_turno')
+@can('modificacionTurno')
 <div class="modal fade" id="modal-edit-event" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">					
@@ -36,12 +36,14 @@
 			</div>
             <div class="modal-footer d-flex justify-content-center mt-4">
 				<button type="submit" for class="btn btn-primary btn-pill m-0">Editar Turno</button>
-				</form>
-				<form method="POST" action="{{ route('turnos.destroy', $turno->id) }}">
-					@csrf
-					@method('DELETE')
-					<button type="submit" for class="btn btn-primary btn-pill m-0">Borrar Turno</button>
-				</form>
+                </form>
+                @can('bajaTurno')
+                    <form method="POST" action="{{ route('turnos.destroy', $turno->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" for class="btn btn-primary btn-pill m-0">Borrar Turno</button>
+                    </form>
+                @endcan
             </div>    
     	</div>
 	</div>

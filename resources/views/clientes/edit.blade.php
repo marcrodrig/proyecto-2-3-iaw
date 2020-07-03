@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-@can('edit_turno')
+@can('modificacionCliente')
 <div class="modal fade" id="modal-edit-event" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">					

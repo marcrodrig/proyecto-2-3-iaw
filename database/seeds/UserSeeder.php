@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 use App\User;
 use App\Role;
-use App\Ability;
 
 class UserSeeder extends Seeder
 {
@@ -36,13 +35,8 @@ class UserSeeder extends Seeder
             'avatar' => 'foto1.png'
         ]);
 
-        $user = User::find(1);
-        $administrador = Role::firstOrCreate(['nombre'=>'admin']);
-        $agregarTurno = Ability::firstOrCreate(['nombre'=>'add_turno']);
-        $editarTurno = Ability::firstOrCreate(['nombre'=>'edit_turno']);
-        $administrador->allowTo($agregarTurno);
-        $administrador->allowTo($editarTurno);
-        $user->assignRole($administrador);
+        $user1 = User::find(1);
+        $user1->assignRole('admin');
 
         DB::table('users')->insert([
             'name' => 'Patricio Rodríguez',
@@ -51,5 +45,8 @@ class UserSeeder extends Seeder
             'username' => 'prod',
             'avatar' => 'foto1.png'
         ]);
+
+        $user2 = User::find(2);
+        $user2->assignRole('editor');
     }
 }
