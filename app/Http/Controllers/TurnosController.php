@@ -103,4 +103,12 @@ class TurnosController extends Controller
         return redirect('/home')->with('success', 'Turno eliminado.');
     }
 
+    public function list() {
+        return Turno::get();
+    }
+
+    public function get($id) {
+        return Turno::findOrFail($id);
+    }
+
 }
