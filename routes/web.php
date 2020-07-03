@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\Event as EventResource;
-use App\Turno;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +24,7 @@ Route::get('/home', 'TurnosController@index')->name('home');
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
+Route::get('/users/{user}', 'UsersController@show')->name('users.show')->middleware('owner', 'can:modificacionPerfil');
 Route::get('/users/{user}/edit', 'UsersController@edit')->name('users.edit')->middleware('owner', 'can:modificacionPerfil');
 Route::patch('/users/{user}', 'UsersController@update')->name('users.update');
 

@@ -47,10 +47,12 @@ class ClientesController extends Controller
         ]);
 
         $file = $request['foto'];
-        $filename = $file->getClientOriginalName();
+       /* $filename = $file->getClientOriginalName();
         $file->storeAs('/',$filename);
 
-        $datosValidadosCliente['foto'] = $filename;
+        $datosValidadosCliente['foto'] = $filename;*/
+        $foto = base64_encode(file_get_contents($file));
+        $datosValidadosCliente['foto'] = $foto;
 
         Cliente::create($datosValidadosCliente);
 
@@ -106,6 +108,7 @@ class ClientesController extends Controller
         $cliente = Cliente::findOrFail($id);
 
         if($request->has('foto')) {
+            /*
             // Elimino foto antigua
             Storage::delete([$cliente->foto]);
             // Almaceno nueva foto
@@ -116,6 +119,10 @@ class ClientesController extends Controller
             $filename = $filename.'.'.$extension;
             $file->storeAs('/',$filename);
             $dataCliente['foto'] = $filename;
+            */
+            $file = $request['foto'];
+            $foto = base64_encode(file_get_contents($file));
+            $dataCliente['foto'] = $foto;
         }
 
         $cliente->update($dataCliente);

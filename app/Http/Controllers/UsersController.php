@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+
+    public function show(User $user) {
+        return view('users.show', compact('user'));
+    }
+
     public function edit(User $user) {
         return view('users.edit', compact('user'));
     }
@@ -23,13 +28,17 @@ class UsersController extends Controller
         $actualizaAvatar = request()->has('avatar');
         if ($actualizaAvatar) {
             // Store en storage/app/public, link con public/storage
-            $file = request()->file('avatar');
+            /*$file = request()->file('avatar');
             $filename = $file->getClientOriginalName();
             $file->storeAs($filename,'');
-            $validatedAttributes['avatar'] = $filename;
+            $validatedAttributes['avatar'] = $filename;*/
+
+            $avatar = base64_encode(file_get_contents(request()->file('avatar')));
+            dd($avatar);
+            $validatedAttributes['avatar'] = $avatar;
         }
         $user->update($validatedAttributes);
         
-        return redirect($user->path());
+        return redirect(route('users.show', $user))->with('success', 'Perfil modificado.');
     }
 }

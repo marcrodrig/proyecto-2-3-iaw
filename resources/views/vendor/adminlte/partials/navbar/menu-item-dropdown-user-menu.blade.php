@@ -3,7 +3,7 @@
     {{-- User menu toggler --}}
     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
         @if(config('adminlte.usermenu_image'))
-            <img src="{{ asset('storage/' . Auth::user()->avatar) }}"
+            <img src="{{ 'data:image/png;base64, ' . Auth::user()->avatar }}"
                  class="user-image img-circle elevation-2"
                  alt="{{ Auth::user()->name }}">
         @endif
@@ -19,7 +19,7 @@
         <li class="user-header {{ config('adminlte.usermenu_header_class', 'bg-primary') }}
             @if(!config('adminlte.usermenu_image')) h-auto @endif">
             @if(config('adminlte.usermenu_image'))
-                <img src="{{ asset('storage/' . Auth::user()->avatar) }}"
+                <img src="{{ 'data:image/png;base64, ' . Auth::user()->avatar }}"
                         class="img-circle elevation-2"
                         alt="{{ Auth::user()->name }}">
             @endif
@@ -29,7 +29,7 @@
         
         {{-- User menu body --}}
         <li>
-            <a href="{{ route('users.edit', Auth::user()) }}" class="btn btn-default btn-flat float-right btn-block">
+            <a href="{{ route('users.show', Auth::user()) }}" class="btn btn-default btn-flat float-right btn-block">
                 <i class="fa fa-fw fa-user"></i>
                 Perfil
             </a>

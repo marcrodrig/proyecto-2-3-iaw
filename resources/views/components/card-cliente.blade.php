@@ -1,6 +1,6 @@
 <div class="card card-cliente">
 	<div class="card-body">
-		<img class="card-img-top img-circle rounded-circle" src="{{ asset('storage/' . $cliente->foto) }}" alt="Foto cliente">
+		<img class="card-img-top img-circle rounded-circle" src="{{ 'data:image/png;base64, ' . $cliente->foto }}" alt="Foto cliente">
 		<h5 class="card-title text-center w-100 text-dark">{{ $cliente->nombre }} {{ $cliente->apellido }}</h5>
 
 		<table class="table table-borderless w-50 m-auto">
