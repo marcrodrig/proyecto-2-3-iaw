@@ -5,7 +5,7 @@
     {{-- Navbar left links --}}
     <ul class="navbar-nav">
         {{-- Left sidebar toggler link --}}
-        @include('adminlte::partials\navbar.menu-item-left-sidebar-toggler')
+        @include('adminlte::partials.navbar.menu-item-left-sidebar-toggler')
 
     </ul>
 
