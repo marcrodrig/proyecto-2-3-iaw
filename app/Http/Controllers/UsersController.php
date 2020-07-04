@@ -34,7 +34,6 @@ class UsersController extends Controller
             $validatedAttributes['avatar'] = $filename;*/
 
             $avatar = base64_encode(file_get_contents(request()->file('avatar')));
-            dd($avatar);
             $validatedAttributes['avatar'] = $avatar;
         }
         $user->update($validatedAttributes);

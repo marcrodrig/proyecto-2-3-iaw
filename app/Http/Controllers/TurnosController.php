@@ -104,7 +104,7 @@ class TurnosController extends Controller
     }
 
     public function list() {
-        return Turno::get();
+        return json_encode(Turno::get());
     }
 
     public function get($id) {

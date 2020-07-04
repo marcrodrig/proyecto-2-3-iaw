@@ -67,14 +67,17 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $file = $data['avatar'];
-        $filename = $file->getClientOriginalName();
-        request('avatar')->storeAs('/',$filename);
+        /*$filename = $file->getClientOriginalName();
+        request('avatar')->storeAs('/',$filename);*/
+        $avatar = base64_encode(file_get_contents($file));
         return User::create([
             'username' => $data['username'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'avatar' => $filename
+            //'avatar' => $filename,
+            'avatar' => $avatar,
+            'api_token' => Str::random(80),
         ]);
     }
 

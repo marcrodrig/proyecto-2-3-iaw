@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/login', 'Auth\AuthController@login');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/turnos', 'TurnosController@list');
-Route::get('/turnos/{id}', 'TurnosController@get');
+Route::middleware('auth:api')->get('/turno', 'TurnosController@list');
+Route::middleware('auth:api')->get('/turno/{id}', 'TurnosController@get');
