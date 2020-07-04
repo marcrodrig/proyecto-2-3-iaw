@@ -141,4 +141,12 @@ class ClientesController extends Controller
 		$cliente->delete();
         return redirect(route('clientes'))->with('success', 'Cliente eliminado.');
     }
+
+    public function list() {
+        return Cliente::get();
+    }
+
+    public function get($id) {
+        return Cliente::findOrFail($id);
+    }
 }

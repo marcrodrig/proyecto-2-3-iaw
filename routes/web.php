@@ -14,9 +14,7 @@ use App\Http\Resources\Event as EventResource;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'InicioController@show');
 
 Auth::routes();
 

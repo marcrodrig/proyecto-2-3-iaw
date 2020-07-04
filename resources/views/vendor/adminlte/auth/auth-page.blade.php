@@ -56,7 +56,6 @@
 @stop
 
 @section('adminlte_js')
-    <script src="{{ asset('js/adminlte.min.js') }}"></script>
     @stack('js')
     @yield('js')
 @stop

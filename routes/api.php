@@ -16,9 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', 'Auth\AuthController@login');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function () {
+    Route::get('/turnos', 'TurnosController@list');
+    Route::get('/turnos/{id}', 'TurnosController@get');
+    Route::get('/clientes', 'ClientesController@list');
+    Route::get('/clientes/{id}', 'ClientesController@get');
+    Route::get('/reservas', 'ReservasController@list');
 });
-
-Route::middleware('auth:api')->get('/turno', 'TurnosController@list');
-Route::middleware('auth:api')->get('/turno/{id}', 'TurnosController@get');
