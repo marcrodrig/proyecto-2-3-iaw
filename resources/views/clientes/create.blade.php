@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-        <div class="modal fade" id="modal-add-event" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">					
                     <div class="modal-header px-4">
@@ -35,17 +35,5 @@
 @section('js')
 	<!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#modal-add-event').modal();
-        });
-		$('#modal-add-event').on('hidden.bs.modal', function () {	
-            window.location.replace('{{route('home')}}');
-		});
-		$(window).resize(function() {
-			if ($(window).width() < 1000) {
-				$('#modal-add-event').modal('hide');
-			}
-        });       
-    </script>
+    <script src="{{ asset('js/modalCliente.js') }}"></script>
 @endsection

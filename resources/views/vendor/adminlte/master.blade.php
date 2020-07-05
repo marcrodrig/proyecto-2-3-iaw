@@ -19,6 +19,7 @@
     <link href="{{ asset('images/mr-icon.png') }}" rel="shortcut icon" />
 
     {{-- Custom stylesheets (pre AdminLTE) --}}
+    <link rel="stylesheet" href="{{ asset('css/preloader.css') }}">
     @yield('adminlte_css_pre')
 
     <!-- Fonts -->
@@ -36,12 +37,18 @@
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
-
+    <div class="preloader"></div>
     {{-- Body Content --}}
     @yield('body')
 
     {{-- Base Scripts --}}
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script>
+        $(window).on('load', function() {
+            $('.preloader').fadeOut('slow');
+         });
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     {{-- Custom Scripts --}}

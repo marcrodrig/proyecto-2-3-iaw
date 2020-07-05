@@ -8,7 +8,7 @@
 
 @section('content')
 @can('modificacionCliente')
-<div class="modal fade" id="modal-edit-event" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">					
             <div class="modal-header px-4">
@@ -37,12 +37,6 @@
 @section('js')
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.0/js/mdb.min.js"></script>
-    <script>
-		$('#modal-edit-event').on('hidden.bs.modal', function () {
-			window.location.replace('{{route('clientes')}}');
-		});
-        $(document).ready(function() {
-            $('#modal-edit-event').modal();
-        });
-    </script>
+    <script> var redireccionModalUrl = '{{route('home')}}'; </script>
+    <script src="{{ asset('js/modalCliente.js') }}"></script>
 @endsection

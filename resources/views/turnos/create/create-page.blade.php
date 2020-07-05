@@ -9,7 +9,7 @@
 @stop
 
 @section('content')
-	<div class="modal fade" id="modal-add-event" tabindex="-1" role="dialog">
+	<div class="modal fade" id="modal" tabindex="-1" role="dialog">
 		<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 	  		<div class="modal-content">
 				<div class="modal-header px-4">
@@ -25,21 +25,9 @@
 @endsection
 
 @section('adminlte_js')
-    <script src="{{ asset('js/adminlte.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-			$('body').css('overflow','hidden');
-            $('#modal-add-event').modal();
-        });
-		$('#modal-add-event').on('hidden.bs.modal', function () {	
-            window.location.replace('{{route('home')}}');
-		});
-		$(window).resize(function() {
-			if ($(window).width() < 1000) {
-				$('#modal-add-event').modal('hide');
-			}
-        });
-    </script>
+	<script src="{{ asset('js/adminlte.min.js') }}"></script>
+	<script> var redireccionModalUrl = '{{route('home')}}'; </script>
+    <script src="{{ asset('js/modalTurno.js') }}"></script>
     @stack('js')
     @yield('js')
 @stop
