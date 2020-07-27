@@ -16,10 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', 'Auth\AuthController@login');
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/logoutAPI', 'Auth\AuthController@logoutAPI');
     Route::get('/turnos', 'TurnosController@list');
     Route::get('/turnos/{id}', 'TurnosController@get');
     Route::get('/clientes', 'ClientesController@list');
     Route::get('/clientes/{id}', 'ClientesController@get');
     Route::get('/reservas', 'ReservasController@list');
+    Route::post('/clientes', 'ClientesController@crearCliente');
+    Route::put('/clientes/{id}', 'ClientesController@editarCliente');
+    Route::delete('/clientes/{id}', 'ClientesController@eliminarCliente');
 });

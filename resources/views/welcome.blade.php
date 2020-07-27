@@ -55,6 +55,7 @@
 				<ul class="navbar-nav ml-auto">
 					@if (Route::has('login'))
 						<div class="top-right links">
+                            <a href="{{route('spa')}}" class="btn btn-primary"><div class="text-white">SPA</div></a>
 							@auth
 								<a href="{{ url('/home') }}">Home</a>
 								<a href="{{ url('/logout') }}">{{ __('Logout') }}</a>

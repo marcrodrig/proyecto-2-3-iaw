@@ -7,39 +7,34 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Response;
+use Illuminate\Validation\ValidationException;
 
-class AuthController extends Controller
-{
-    public function login(Request $request)
-{
-  try {
-    $request->validate([
-      'email' => 'email|required',
-      'password' => 'required'
-    ]);
-    $credentials = request(['email', 'password']);
-    if (!Auth::attempt($credentials)) {
-      return response()->json([
-        'status_code' => 500,
-        'message' => 'Unauthorized'
-      ]);
-    }
-    $user = User::where('email', $request->email)->first();
-    if ( ! Hash::check($request->password, $user->password, [])) {
-       throw new \Exception('Error in Login');
-    }
-    $tokenResult = $user->api_token;
-    return response()->json([
-      'status_code' => 200,
-      'access_token' => $tokenResult,
-      'token_type' => 'Bearer',
-    ]);
-  } catch (Exception $error) {
-    return response()->json([
-      'status_code' => 500,
-      'message' => 'Error in Login',
-      'error' => $error,
-    ]);
-  }
-}
+class AuthController extends Controller {
+
+    public function login(Request $request) {
+
+		$request->validate([
+			'email' => 'required|email',
+			'password' => 'required',
+		]);
+	
+		$user = User::where('email', $request->email)->first();
+	
+		if (! $user || ! Hash::check($request->password, $user->password)) {
+			throw ValidationException::withMessages([
+				'email' => ['The provided credentials are incorrect.'],
+			]);
+		}
+		$token =  $user->createToken('api_token')->plainTextToken;
+		return response()->json(['user' =>  $user, 'access_token' => $token, 'status_code' => 200]);
+	}
+  
+	public function logoutAPI(Request $request) {
+		// Revoke all tokens...
+		$request->user()->tokens()->delete();
+		return response()->json(['message' => 'Logout exitoso.']);
+	}
+
 }
