@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
  
 </head>
-<body>
+<body class="sidebar-mini">
     <div id="index"></div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/adminlte.min.js') }}"></script>

@@ -103,6 +103,8 @@ class TurnosController extends Controller
         return redirect('/home')->with('success', 'Turno eliminado.');
     }
 
+    /** Para API */
+
     public function list() {
         return Turno::get();
     }
@@ -110,5 +112,52 @@ class TurnosController extends Controller
     public function get($id) {
         return Turno::findOrFail($id);
     }
+
+    public function crearTurno(Request $request) {
+        $datosValidadosTurno = $request->validate([
+            'dia'=> ['required', 'date'],
+            'hora' => ['required', 'date_format:H:i:s',
+                    Rule::unique('turnos')->where(function ($query) use ($request) {
+                        return $query->where('dia', $request->dia);})
+                    ],
+            'tipoTurno'=> ['required', Rule::in(['femenino', 'masculino', 'mixto']),]
+        ]);
+        
+        $cliente = Cliente::findOrFail($request->get('idCliente'));
+        $turno = $cliente->turnos()->create($datosValidadosTurno);
+
+       return response()->json(['turno' =>  $turno, 'status_code' => 200, 'message' => 'Turno agregado.']);
+   }
+
+	public function editarTurno(Request $request, $id) {
+		$datosTurno = $request->only(['dia', 'hora', 'tipoTurno']);
+
+		$validadorTurno = Validator::make($datosTurno, [
+				'dia'=> ['required', 'date'],
+				'hora' => ['required', 'date_format:H:i:s',
+						Rule::unique('turnos')->where(function ($query) use ($request) {
+							return $query->where('dia', $request->dia);})
+						],
+				'tipoTurno'=> ['required', Rule::in(['femenino', 'masculino', 'mixto']),]
+			]);
+			
+		$turno = Turno::findOrFail($id);
+
+		if ($validadorTurno->fails() &&
+			$validadorTurno->getData()['dia'] == $turno->dia &&
+			$validadorTurno->getData()['hora'] == $turno->hora || $validadorTurno->passes()) {
+				$turno->update($datosTurno);
+				return response()->json(['turno' =>  $turno, 'status_code' => 200, 'message' => 'Turno modificado.']);
+			}
+		else
+			//Para que se dispare el error 422 de Laravel
+			$validadorTurno->validate();
+	}
+
+	public function eliminarTurno($id) {
+		$turno = Turno::findOrFail($id);
+		$turno->delete();
+		return response()->json(['status_code' => 200, 'message' => 'Turno eliminado.']);
+	}
 
 }

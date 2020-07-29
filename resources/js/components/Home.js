@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import Login from '../views/Login/Login';
 import Dashboard from '../views/user/Dashboard/Dashboard';
+import LoginContainer from '../views/Login/LoginContainer';
 
 class Home extends Component {
 
@@ -25,7 +25,7 @@ class Home extends Component {
 		const isLoggedIn = this.state.isLoggedIn;
 		return (
 			<div>
-				{isLoggedIn ? <Dashboard/> : <Login /> }
+				{isLoggedIn ? <Dashboard/> : <LoginContainer /> }
 			</div>
 		);
 	}

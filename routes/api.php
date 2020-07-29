@@ -26,4 +26,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/clientes', 'ClientesController@crearCliente');
     Route::put('/clientes/{id}', 'ClientesController@editarCliente');
     Route::delete('/clientes/{id}', 'ClientesController@eliminarCliente');
+    Route::post('/turnos', 'TurnosController@crearTurno');
+    Route::put('/turnos/{id}', 'TurnosController@editarTurno');
+    Route::delete('/turnos/{id}', 'TurnosController@eliminarTurno');
 });

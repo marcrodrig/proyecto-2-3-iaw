@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import { Modal, ModalBody, ModalFooter } from 'react-bootstrap';
-import ModalHeader from 'react-bootstrap/esm/ModalHeader';
+import { Modal } from 'react-bootstrap';
 import Button from 'react-bootstrap-button-loader';
 
 class ModalClienteBorrar extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            eliminando: false,
-        }
+        this.state = {eliminando: false,}
         this.handleClickBorrar = this.handleClickBorrar.bind(this);
     }
 
@@ -36,7 +33,7 @@ class ModalClienteBorrar extends Component {
                 this.props.hideModal();
                 this.setState({eliminando : false});
 				alert('Ocurrió un error inesperado eliminando el cliente');
-				console.log('ver error', error.response);
+				//console.log('Error eliminar cliente', error.response);
 		});
     }
 
@@ -44,15 +41,15 @@ class ModalClienteBorrar extends Component {
         return(
             <Modal show={this.props.show} onHide={this.props.hideModal} centered>
 				<Modal.Header className="px-4" closeButton><h5>Eliminar cliente</h5></Modal.Header>
-				<ModalBody>					
+				<Modal.Body>					
 					<h1>¿Estás seguro?</h1>
 					<p>¿Querés borrar el cliente: {this.props.cliente.nombre} {this.props.cliente.apellido}?</p>
-				</ModalBody>
-				<ModalFooter>
+				</Modal.Body>
+				<Modal.Footer>
 					<Button type="submit" variant="primary" loading={this.state.eliminando} style={{textTransform : 'none', fontWeight: '700'}} onClick={this.handleClickBorrar}>
 						{this.state.eliminando ? 'Eliminando...': 'Eliminar'}
 					</Button>
-				</ModalFooter>
+				</Modal.Footer>
 			</Modal>
 		);
     }

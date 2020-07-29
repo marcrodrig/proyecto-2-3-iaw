@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import ModalCliente from './ModalClienteCrearEditar';
 import { MDBContainer as Container, MDBBtn, MDBIcon } from 'mdbreact';
 import TablaClientes from './TablaClientes';
+import ModalClienteCrearEditar from './ModalClienteCrearEditar';
 import ModalClienteBorrar from './ModalClienteBorrar'
 
 class CardBodyClientes extends Component {
@@ -11,7 +11,6 @@ class CardBodyClientes extends Component {
 		this.state = {
 			showModalCrearEditar : false,
 			showModalBorrar: false,
-			formSubmitting: false,
 			modoModal : null,
 			cliente : {}
 		};
@@ -61,7 +60,7 @@ class CardBodyClientes extends Component {
 					<MDBIcon icon="user-plus"/> Agregar
 				</MDBBtn>
 				<TablaClientes clientes={this.props.clientes} handleEditarCliente={this.handleEditarCliente} handleBorrarCliente={this.handleBorrarCliente}/>
-				<ModalCliente user={this.props.user} show={this.state.showModalCrearEditar} onHide={this.hideModal} cliente={this.state.cliente} modo={this.state.modoModal} agregarCliente={this.props.agregarCliente} modificarCliente={this.props.modificarCliente} clientes={this.props.clientes}/>
+				<ModalClienteCrearEditar user={this.props.user} show={this.state.showModalCrearEditar} onHide={this.hideModal} cliente={this.state.cliente} modo={this.state.modoModal} agregarCliente={this.props.agregarCliente} modificarCliente={this.props.modificarCliente} clientes={this.props.clientes}/>
 				<ModalClienteBorrar user={this.props.user} cliente={this.state.cliente} show={this.state.showModalBorrar} hideModal={this.hideModalBorrar} eliminarCliente={this.props.eliminarCliente}/>
 			</Container>
 		);

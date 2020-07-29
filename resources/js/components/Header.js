@@ -33,6 +33,7 @@ class Header extends Component {
 					</Nav.Item>
 				</Nav>
 				<Nav className="ml-auto ">
+				{!this.props.logout &&
 					<Nav.Item className="user-menu">
 						<MDBDropdown>
 
@@ -56,6 +57,7 @@ class Header extends Component {
 							</MDBDropdownMenu>
 						</MDBDropdown>	
 					</Nav.Item>
+				}
 				</Nav>
 			</Navbar>
 		);

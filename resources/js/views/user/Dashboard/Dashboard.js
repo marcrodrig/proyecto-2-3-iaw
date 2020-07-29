@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Header from '../../../components/Header';
 import LeftSidebar from '../../../components/LeftSidebar';
 import CardBodyClientes from '../../../components/CardBodyClientes';
-import TablaReservas from '../../../components/TablaReservas';
+import CardBodyTurnos from '../../../components/CardBodyTurnos';
 import { Spinner } from 'react-bootstrap';
 import { MDBCard as Card, MDBCardHeader as CardHeader, MDBCardTitle as CardTitle, MDBContainer as Container, MDBRow as Row, MDBCol as Col, MDBCardBody as CardBody, MDBBtn, MDBIcon} from 'mdbreact';
 
@@ -21,8 +21,11 @@ class Dashboard extends Component {
 		}
 		this.handleLogoutClick = this.handleLogoutClick.bind(this);
 		this.agregarCliente = this.agregarCliente.bind(this);
+		this.agregarTurno = this.agregarTurno.bind(this);
 		this.modificarCliente = this.modificarCliente.bind(this);
+		this.modificarTurno = this.modificarTurno.bind(this);
 		this.eliminarCliente = this.eliminarCliente.bind(this);
+		this.eliminarTurno = this.eliminarTurno.bind(this);
 	  }
 
 	componentDidMount() {
@@ -32,7 +35,6 @@ class Dashboard extends Component {
 			'Authorization': `Bearer ${this.state.user.access_token}` 
 		}})
 		.then(res => {
-			console.log('res data',res.data);
 			this.setState(prevState => ({
 				cargandoClientes: !prevState.cargandoClientes,
 				clientes: res.data
@@ -53,7 +55,6 @@ class Dashboard extends Component {
 
 	// check if user is authenticated and storing authentication data as states if true
 	componentWillMount() {
-		document.body.classList.add('sidebar-mini');
 		let state = localStorage["appState"];
 		if (state) {
 			let appState = JSON.parse(state);
@@ -69,18 +70,37 @@ class Dashboard extends Component {
 		})
 	}
 
+	agregarTurno(turno) {
+		this.setState({
+			turnos:
+				// no recomendado el this.state acá  
+				this.state.turnos.concat(turno)
+		})
+	}
+
 	modificarCliente(cliente) {
-		//e.preventDefault();
 		const index = this.state.clientes.findIndex(item => item.id === cliente.id);
 		var clientesModificados = [...this.state.clientes]
 		clientesModificados[index] = cliente;
 		this.setState({clientes: clientesModificados})
 	}
 
+	modificarTurno(turno) {
+		const index = this.state.turnos.findIndex(item => item.id === turno.id);
+		var turnosModificados = [...this.state.turnos]
+		turnosModificados[index] = turno;
+		this.setState({turnos: turnosModificados})
+	}
+
 	eliminarCliente(cliente) {
 		let clientesBorrado = this.state.clientes.filter(item => item.id !== cliente.id);
 		let turnosBorrado = this.state.turnos.filter(item => item.cliente_id !== cliente.id);
 		this.setState({clientes: clientesBorrado, turnos: turnosBorrado});
+	}
+
+	eliminarTurno(turno) {
+		let turnosBorrado = this.state.turnos.filter(item => item.id !== turno.id);
+		this.setState({turnos: turnosBorrado});
 	}
 
 	handleLogoutClick() {
@@ -92,23 +112,20 @@ class Dashboard extends Component {
 			'Authorization': `Bearer ${this.state.user.access_token}` 
 		}})
 		.then(res => {
-			console.log('logout',res);
-			this.setState({isLoggedIn : false});
-			location.reload();
 			let appState = {
 				isLoggedIn: false,
 				user: {}
 			};
 			localStorage["appState"] = JSON.stringify(appState);
+			location.reload();
 			this.setState(appState);
-			// this.props.history.push('/login');
 		});
 	}
 
 	render() {
 		return (
 			<div className="wrapper">
-				<Header user={this.state.user} handleLogoutClick={this.handleLogoutClick} />
+				<Header user={this.state.user} logout={this.state.logout} handleLogoutClick={this.handleLogoutClick} />
 				<LeftSidebar />
 				<div className="content-wrapper">
 					<div className="content text-center">
@@ -131,7 +148,7 @@ class Dashboard extends Component {
 						</>
 						:
 						<div>
-							<Card className="mb-2 p-0">
+							<Card className='mb-2 p-0' style={{minHeight: '25vw'}}>
 								<CardHeader>
 									<CardTitle>Clientes</CardTitle>
 									<div className="card-tools">
@@ -144,7 +161,7 @@ class Dashboard extends Component {
 									{this.state.cargandoClientes ? <Spinner animation="border"/> : <CardBodyClientes user={this.state.user} clientes={this.state.clientes} agregarCliente={this.agregarCliente} modificarCliente={this.modificarCliente} eliminarCliente={this.eliminarCliente}/>}
 								</CardBody>
 							</Card>
-							<Card className="p-0">
+							<Card className="p-0" style={{minHeight: '25vw'}}>
 								<CardHeader>
 									<CardTitle>Reservas</CardTitle>
 									<div className="card-tools">
@@ -156,7 +173,7 @@ class Dashboard extends Component {
 								<CardBody className="text-center">
 									{this.state.cargandoTurnos
 										? <Spinner animation="border" />
-										: <TablaReservas turnos={this.state.turnos} clientes={this.state.clientes}/>
+										: <CardBodyTurnos user={this.state.user} turnos={this.state.turnos} clientes={this.state.clientes} agregarTurno={this.agregarTurno} modificarTurno={this.modificarTurno} eliminarTurno={this.eliminarTurno}/>
 									}
 								</CardBody>
 							</Card>

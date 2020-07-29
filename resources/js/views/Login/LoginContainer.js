@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import FlashMessage from 'react-flash-message';
 import Error from '../../components/Error';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap-button-loader';
 
 class LoginContainer extends Component {
 
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 		this.state = {
 			isLoggedIn: false,
 			formSubmitting: false,
@@ -35,15 +34,6 @@ class LoginContainer extends Component {
 		}
 	}
 
-	// VER
-	componentDidMount() {
-		const { prevLocation } = this.state.redirect.state || { prevLocation: { pathname: '/dashboard' } };
-		if (prevLocation && this.state.isLoggedIn) {
-			return this.props.history.push(prevLocation);
-		}
-	}
-
-	/** CHEQUEAR **/
 	handleSubmit(e) {
 		e.preventDefault();
 		/*axios.get('/oauth/personal-access-tokens')
@@ -53,13 +43,11 @@ class LoginContainer extends Component {
 		this.setState({formSubmitting: true});
 		let userData = JSON.stringify(this.state.user);
 		axios.post("/api/login", userData, {headers:{"Content-Type" : "application/json"}}).then(response => {
-			console.log('1');
-			console.log('response',response);
 			return response;
 		}).then(json => {
-			console.log('json',json);
+			//console.log('json',json);
 			if (json.data.status_code == 200) {
-				console.log('2');
+				//console.log('2');
 				let userData = {
 					id: json.data.user.id,
 					name: json.data.user.name,
@@ -83,7 +71,7 @@ class LoginContainer extends Component {
 			}
 			else {
 				if (json.data.status_code == 500) {
-					console.log('3');
+					//console.log('3');
 					this.setState({
 						errorValidacion: '',
 						error: json.data.message,
@@ -93,10 +81,10 @@ class LoginContainer extends Component {
 				}
 			}
 		}).catch(error => {if (error.response.status = 422) {
-			console.log('4');
+			//console.log('4');
 			// Laravel utiliza el código 422 cuando hay errores en la validación de los datos 
 			if (error.response.statusText == 'Unprocessable Entity') {
-				console.log('4',error.response);
+				//console.log('4',error.response);
 				// The request was made and the server responded with a status code that falls out of the range of 2xx
 				let err = error.response.data;
 				this.setState({
@@ -105,7 +93,7 @@ class LoginContainer extends Component {
 				})
 			}
 			else {
-				console.log('ver error', error.response);
+				//console.log('ver error', error.response);
 			}
 		}
 		}).finally(this.setState({error: '',}
@@ -134,19 +122,10 @@ class LoginContainer extends Component {
 		this.setState({ isChecked: !this.state.isChecked });
 	}
 
-	handleClick() {
-		//simulating an API
-	/*	setTimeout(() => {
-		  this.setState({sendState: 'finished'})
-		}, 3000)*/
-	  }
-
 	render() {
-		const { state = {} } = this.state.redirect;
-		const { error } = state;
-		const { isChecked } = this.state;
+		const { error, isChecked } = this.state;
 		return (
-			<React.Fragment>
+			<div className="content">
 				<div className="login-page">
 					<div className="login-box">
 						<div className="login-logo">
@@ -174,18 +153,15 @@ class LoginContainer extends Component {
 											placeholder="Email"
 											onChange={this.handleEmail}
 											required
+											autoComplete="off"
 										/>
 										<div className="input-group-append">
 											<div className="input-group-text">
 												<span className="fas fa-envelope"></span>
 											</div>
 										</div>
-										{this.state.errorValidacion.email
-										? <Error msg={this.state.errorValidacion.email[0]}/>
-										: ''}
-										{this.state.error
-										? <Error msg={this.state.error}/>
-										: ''}
+										{this.state.errorValidacion.email && <Error msg={this.state.errorValidacion.email[0]}/>}
+										{this.state.error && <Error msg={this.state.error}/>}
 									</div>
 									<div className="input-group mb-3">
 										<input type="password"
@@ -200,9 +176,7 @@ class LoginContainer extends Component {
 												<span className="fas fa-lock"></span>
 											</div>
 										</div>
-										{this.state.errorValidacion.password
-										? <Error msg={this.state.errorValidacion.password}/>
-										: ''}
+										{this.state.errorValidacion.password && <Error msg={this.state.errorValidacion.password}/>}
 									</div>
 									<div className="row">
 										<div className="col-5">
@@ -212,11 +186,9 @@ class LoginContainer extends Component {
 											</div>
 										</div>
 										<div className="col-7">
-										<Button type="submit" className="btn btn-primary btn-flat btn-block" loading={this.state.formSubmitting} style={{textTransform : 'none', fontWeight: '700'}}>
-											{this.state.formSubmitting ? 'Ingresando': 'Acceder'}
-										</Button>
-											{/*<button type="submit" className="btn btn-primary btn-flat btn-block">
-											<span className="fas fa-sign-in-alt"></span> Acceder</button>*/}
+											<Button type="submit" className="btn btn-primary btn-flat btn-block" loading={this.state.formSubmitting} style={{textTransform : 'none', fontWeight: '700'}}>
+												{this.state.formSubmitting ? 'Ingresando': 'Acceder'}
+											</Button>
 										</div>
 									</div>
 								</form>
@@ -224,7 +196,7 @@ class LoginContainer extends Component {
 						</div>
 					</div>
 				</div>
-			</React.Fragment>
+			</div>
 		)
 	}
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import ItemClienteTabla from './ItemClienteTabla';
+import {MDBBtn, MDBIcon} from 'mdbreact';
 
-const TablaReservas = ({turnos, clientes}) => (
+const TablaReservas = ({turnos, clientes, handleEditarTurno, handleBorrarTurno}) => (
 	// projects de adminlte
     <table className="table table-striped projects">
         <thead>
@@ -44,14 +45,12 @@ const TablaReservas = ({turnos, clientes}) => (
 							<span className="badge badge-success">{turno.tipoTurno}</span>
 						</td>
 						<td className="project-actions text-right" style={{verticalAlign:'middle'}}>
-							<a className="btn btn-info btn-sm mr-2" href="#">
-								<i className="fas fa-pencil-alt"></i>
-								Edit
-							</a>
-							<a className="btn btn-danger btn-sm" href="#">
-								<i className="fas fa-trash"></i>
-								Delete
-							</a>
+							<MDBBtn size="sm" color="info" value={turno.id} onClick={handleEditarTurno}>
+								<MDBIcon icon="pencil-alt"></MDBIcon> Editar
+							</MDBBtn>
+							<MDBBtn size="sm" color="danger" value={turno.id} onClick={handleBorrarTurno}>
+								<MDBIcon icon="trash"></MDBIcon> Borrar
+							</MDBBtn>
 						</td>
 					</tr>
 				)

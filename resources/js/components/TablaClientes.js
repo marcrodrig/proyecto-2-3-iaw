@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {MDBBtn, MDBIcon} from 'mdbreact';
 
-class TablaClientes extends Component {
-	
-	constructor(props) {
-		super(props)
-	}
-
-	render() {
+function TablaClientes(props) {
+	const {clientes, handleEditarCliente, handleBorrarCliente} = props 
 		return(
 			// projects de adminlte
 			<table className="table table-striped projects">
@@ -30,7 +25,7 @@ class TablaClientes extends Component {
 				</thead>
 				<tbody>
 					{
-						this.props.clientes.map((cliente) =>
+						clientes.map((cliente) =>
 							<tr key={cliente.id} className="h-100">
 								<td style={{verticalAlign:'middle'}}>
 									#
@@ -50,10 +45,10 @@ class TablaClientes extends Component {
 									{cliente.telefono}
 								</td>
 								<td className="project-actions text-right" style={{verticalAlign:'middle'}}>
-									<MDBBtn size="sm" color="info" value={cliente.id} onClick={this.props.handleEditarCliente}>
+									<MDBBtn size="sm" color="info" value={cliente.id} onClick={handleEditarCliente}>
 										<MDBIcon icon="user-edit"></MDBIcon> Editar
 									</MDBBtn>
-									<MDBBtn size="sm" color="danger" value={cliente.id} onClick={this.props.handleBorrarCliente}>
+									<MDBBtn size="sm" color="danger" value={cliente.id} onClick={handleBorrarCliente}>
 										<MDBIcon icon="user-minus"></MDBIcon> Borrar
 									</MDBBtn>
 								</td>
@@ -63,7 +58,6 @@ class TablaClientes extends Component {
 				</tbody>
 			</table>
 		)
-	}
 }
 
 export default TablaClientes

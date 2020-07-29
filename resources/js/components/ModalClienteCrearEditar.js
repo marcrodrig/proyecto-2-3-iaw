@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap-button-loader';
 import { MDBInput } from 'mdbreact';
 import Error from './Error';
+import { Form } from 'react-bootstrap';
 
 class ModalClienteCrearEditar extends Component {
     
@@ -20,7 +21,6 @@ class ModalClienteCrearEditar extends Component {
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleFileChange = this.handleFileChange.bind(this);
 		this.onHide = this.onHide.bind(this);
-		//this.actualizarCliente = this.actualizarCliente.bind(this);
 	}
 	
 	static getDerivedStateFromProps(props, state) {
@@ -51,12 +51,7 @@ class ModalClienteCrearEditar extends Component {
 		this.setState({cliente: {}, erroresValidacion: {}, fotoSeleccionada: ''});
 	}
 
-	/*actualizarCliente(ncliente) {
-        this.setState({cliente:ncliente})
-    }*/
-
 	handleFileChange() {
-		//console.log(this.fileInput);
 		let file = this.fileInput.current.files[0];
 		this.setState({fotoSeleccionada : file.name});
 		this.createImage(file);
@@ -111,7 +106,7 @@ class ModalClienteCrearEditar extends Component {
 			}
 			else {
 				alert('Ocurrió un error inesperado al registrar el cliente');
-				console.log('ver error', error.response);
+				//console.log('Error creación cliente', error.response);
 			}
 		});
     }
@@ -150,7 +145,7 @@ class ModalClienteCrearEditar extends Component {
 			}
 			else {
 				alert('Ocurrió un error inesperado modificando el cliente');
-				console.log('ver error', error.response);
+				//console.log('Error edición cliente', error.response);
 			}
 		});
 	}
@@ -222,7 +217,7 @@ class ModalClienteCrearEditar extends Component {
 					{this.props.modo == 'editar' && <h5 className="modal-title">Cliente: {this.props.cliente.nombre}  {this.props.cliente.apellido}</h5>}
 					{this.props.modo == 'agregar' && <h5 className="modal-title">Agregar Cliente</h5>}
 				</Modal.Header>
-				<form encType="multipart/form-data" onSubmit={this.props.modo == 'editar' ? this.handleSubmitEditar : this.handleSubmitCrear}> 
+				<Form encType="multipart/form-data" onSubmit={this.props.modo == 'editar' ? this.handleSubmitEditar : this.handleSubmitCrear}>
 					<Modal.Body className="mx-3">
 						{this.renderCardClienteCrearEditar()}
 					</Modal.Body>
@@ -234,7 +229,7 @@ class ModalClienteCrearEditar extends Component {
 							{this.state.formSubmitting ? 'Modificando...': 'Editar'}
 						</Button>}
 					</Modal.Footer>
-				</form>
+				</Form>
 			</Modal>
 		);
     }
