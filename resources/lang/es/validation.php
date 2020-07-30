@@ -37,7 +37,7 @@ return [
     'digits_between' => ':attribute debe tener entre :min y :max dígitos.',
     'dimensions'     => 'Las dimensiones de la imagen :attribute no son válidas.',
     'distinct'       => 'El campo :attribute contiene un valor duplicado.',
-    'email'          => ':attribute no es un correo válido',
+    'email'          => 'El :attribute no es un correo válido.',
     'ends_with'      => 'El campo :attribute debe finalizar con uno de los siguientes valores: :values',
     'exists'         => ':attribute es inválido.',
     'file'           => 'El campo :attribute debe ser un archivo.',
@@ -128,10 +128,11 @@ return [
     */
     'custom' => [
         'password' => [
-            'min' => 'La :attribute debe contener más de :min caracteres',
+            'min' => 'La :attribute debe contener más de :min caracteres.',
         ],
         'email' => [
             'unique' => 'El :attribute ya ha sido registrado.',
+            'regex' => 'El :attribute no puede contener espacios en blanco.'
         ],
         'rut' => [
             'unique' => 'El rut ya ha sido registrado.',
@@ -147,7 +148,8 @@ return [
         'DNI' => [
             'numeric' =>'El DNI debe ser un número.'],
         'foto' => [
-            'mimes' => 'La foto debe ser un archivo con formato: jpeg, bmp, png.'
+            'mimes' => 'La foto debe ser un archivo con formato: jpeg, bmp, png.',
+            'base64mimes' => 'La foto debe ser un archivo con formato: jpeg, bmp, png.'
         ],
         'dia' => [
             'required' => 'El campo día es obligatorio.',

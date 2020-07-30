@@ -142,6 +142,8 @@ class ClientesController extends Controller
         return redirect(route('clientes'))->with('success', 'Cliente eliminado.');
     }
 
+    /** Para API */
+
     public function list() {
         return Cliente::get();
     }
@@ -149,4 +151,44 @@ class ClientesController extends Controller
     public function get($id) {
         return Cliente::findOrFail($id);
     }
+
+    public function crearCliente(Request $request) {
+        $datosValidadosCliente = $request->validate([
+            'nombre' => ['required', 'string', 'min:2', 'max:20', 'alpha'],
+            'apellido' => ['required', 'string', 'min:2', 'max:20', 'alpha'],
+            'DNI' => ['required', 'numeric'],
+            'telefono' => ['required', 'phone:AR'],
+            'foto' => ['required', 'base64mimes:jpeg,bmp,png']
+       ]);
+        
+       $cliente = Cliente::create($datosValidadosCliente);
+
+       return response()->json(['cliente' =>  $cliente, 'status_code' => 200, 'message' => 'Cliente agregado.']);
+   }
+
+   public function editarCliente(Request $request, $id) {
+		$datosValidadosCliente = $request->validate([
+			'nombre' => ['required', 'string', 'min:2', 'max:20', 'alpha'],
+			'apellido' => ['required', 'string', 'min:2', 'max:20', 'alpha'],
+			'DNI' => ['required', 'numeric'],
+			'telefono' => ['required', 'phone:AR'],
+			'foto' => ['required', 'base64mimes:jpeg,bmp,png']
+		]);
+   		// Si hay un error en la validación, Laravel lanza un error 422
+
+    	$cliente = Cliente::findOrFail($id);
+
+    	$cliente->update($datosValidadosCliente);
+   		// dd($cliente);
+    	// si no hay cambios, puedo dar un mensaje
+
+    	return response()->json(['cliente' =>  $cliente, 'status_code' => 200, 'message' => 'Cliente modificado.']);
+	}
+
+	public function eliminarCliente($id) {
+		$cliente = Cliente::findOrFail($id);
+		$cliente->delete();
+		return response()->json(['status_code' => 200, 'message' => 'Cliente eliminado.']);
+	}
+   
 }

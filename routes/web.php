@@ -42,3 +42,5 @@ Route::post('/turnos', 'TurnosController@store')->name('turnos.store');
 Route::get('/turnos/{idTurno}/edit', 'TurnosController@edit')->name('turnos.edit')->middleware('can:modificacionTurno');
 Route::patch('/turnos/{idTurno}', 'TurnosController@update')->name('turnos.update');
 Route::delete('/turnos/{idTurno}', 'TurnosController@destroy')->name('turnos.destroy');
+
+Route::get('/spa', 'SpaController@index')->name('spa');
