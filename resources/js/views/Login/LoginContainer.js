@@ -130,7 +130,7 @@ class LoginContainer extends Component {
 					<div className="login-box">
 						<div className="login-logo">
 							<a href="/">
-								<img src="http://127.0.0.1:8000/images/mr-icon.png" height="50"/>
+								<img src="/images/mr-icon.png" height="50"/>
 								<b>MR</b> Fútbol 5
 							</a>
 						</div>

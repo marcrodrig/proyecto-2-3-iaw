@@ -47,8 +47,8 @@ class ModalClienteCrearEditar extends Component {
 	}
 
 	onHide() {
-		this.props.onHide();
 		this.setState({cliente: {}, erroresValidacion: {}, fotoSeleccionada: ''});
+		this.props.onHide();
 	}
 
 	handleFileChange() {
@@ -60,7 +60,6 @@ class ModalClienteCrearEditar extends Component {
 	createImage(file) {
 		let reader = new FileReader();
 		reader.onload = (e) => {
-			console.log('e',e);
 			this.setState(prevState => ({
 				cliente: {
 					// base64
@@ -87,8 +86,13 @@ class ModalClienteCrearEditar extends Component {
 		axios(config)
 		.then(res => {
 			//console.log('cliente',res.data.cliente);
+			this.setState({
+				formSubmitting : false,
+				cliente: {},
+				erroresValidacion: {},
+				fotoSeleccionada: ''
+			});
 			this.props.agregarCliente(res.data.cliente);
-			this.setState({formSubmitting : false});
 			this.props.onHide();
 		})
 		.catch(error => {

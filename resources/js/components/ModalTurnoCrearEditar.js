@@ -131,7 +131,7 @@ class ModalTurnoCrearEditar extends Component {
 		};
 		axios(config)
 		.then(res => {
-			console.log('turno',res.data.turno);
+			//console.log('turno',res.data.turno);
 			this.props.modificarTurno(res.data.turno);
 			this.setState({formSubmitting : false});
 			this.props.onHide();
